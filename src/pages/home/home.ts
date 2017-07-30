@@ -2,12 +2,15 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { MenuController } from 'ionic-angular';
 import { Geo } from '../geo/geo';
+import { TesteJson } from '../teste-json/teste-json';
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
   geo = Geo;
+  json = TesteJson;
   constructor(public navCtrl: NavController, public menuCtrl: MenuController, public navParams: NavParams) {
     
   }
