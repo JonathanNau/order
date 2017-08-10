@@ -21,6 +21,10 @@ export class TesteJson {
     this.data = this.json.getData();
   }
 
+  setData(){
+    this.json.postRequest()
+  }
+
   ionViewDidLoad() {
     this.json.getData().subscribe(data => {
       this.jobs = [];
@@ -30,7 +34,7 @@ export class TesteJson {
         this.jobs.push(
           {
         job_id: data[i].id, 
-        job_name: data[i].name
+        job_name: data[i].nome
           }
         );
       }
