@@ -9,15 +9,20 @@ import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Geo } from '../pages/geo/geo';
 import { TesteJson } from '../pages/teste-json/teste-json';
+import { Login } from '../pages/login/login';
+import { Signup } from '../pages/signup/signup';
 
 import { Json } from '../providers/json';
+import { LoginProvider } from '../providers/loginprovider';
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     Geo,
-    TesteJson
+    TesteJson,
+    Login,
+    Signup
   ],
   imports: [
     BrowserModule,
@@ -29,13 +34,16 @@ import { Json } from '../providers/json';
     MyApp,
     HomePage,
     Geo,
-    TesteJson
+    TesteJson,
+    Login,
+    Signup
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    Json
+    Json,
+    LoginProvider
   ]
 })
 export class AppModule {}
