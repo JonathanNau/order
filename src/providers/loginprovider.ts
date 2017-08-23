@@ -19,88 +19,97 @@ export class LoginProvider {
     this.AuthToken = null;
   }
   storeUserCredentials(token) {
-        window.localStorage.setItem('raja', token);
-        this.useCredentials(token); 
-  }
-
-  useCredentials(token) {
-        this.isLoggedin = true;
-        this.AuthToken = token;
+    window.localStorage.setItem('user_order', token);
+    this.useCredentials(token);
+    
 }
 
-  loadUserCredentials() {
-    var token = window.localStorage.getItem('raja');
+useCredentials(token) {
+    this.isLoggedin = true;
+    this.AuthToken = token;
+}
+
+loadUserCredentials() {
+    var token = window.localStorage.getItem('user_order');
     this.useCredentials(token);
-  }
+}
 
-  login(user) {
+destroyUserCredentials() {
+    this.isLoggedin = false;
+    this.AuthToken = null;
+    window.localStorage.clear();
+}
+
+authenticate(user) {
+    let creds = {
+      username: user.value.name,
+      password: user.value.password
+  }
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    
     return new Promise(resolve => {
-      this.json.getData().subscribe(data => {
-        for(var i = 0; i < data.length; i++) {
-          if (user.name == data[i].nome && user.password == data[i].senha ){
-            console.log('Login com sucesso')
-            this.storeUserCredentials(data[i].nome);
-            resolve(true);
-          }
-        }
-        resolve(false);
-      });
-      console.log(user)
+        this.http.post('http://localhost:8000/api/auth/token/', JSON.stringify(creds), {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+            console.log(data)
+            console.log(data.token)
+            if(data.token){
+                console.log('consegui')
+                this.storeUserCredentials(data.token);
+                resolve(true);
+            }
+            else{
+                console.log('deu ruim')
+                resolve(false);
+            }
+        }, error => {
+            console.log(error);
+            resolve(false);
+        });
     });
-  }
+}
 
-  getinfo() {
+adduser(user) {
+    let creds = {
+        username: user.name,
+        password: user.password,
+        email: user.email,
+        is_active: true
+    }
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    
     return new Promise(resolve => {
+        this.http.post('http://localhost:8000/api/usuarios/add/', JSON.stringify(creds), {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+            console.log(data['_body']);
+            resolve(true);
+           }, error => {
+            console.log(error);
+            resolve(false);
+        });
+    });
+}
+
+getinfo() {
+    return new Promise(resolve => {
+        var headers = new Headers();
         this.loadUserCredentials();
         console.log(this.AuthToken);
-        if(1+1==2)
-            resolve(true);
-        else
-            resolve(false);
-    });
-  }
-
-  adduser(user) {
-    var displayDate = new Date().toLocaleDateString().split('/');
-    var dData = displayDate[2]+'-'+displayDate[1]+'-'+displayDate[0]
-    let headers = new Headers();
-    headers.append('Content-Type', 'application/json' );
- 
-    let postParams = {
-        nome: user.name,
-        email: user.email,
-        senha: user.password,
-        data: dData,
-        situacao: true
-    }
-    return new Promise(resolve => {
-    this.http.post("http://localhost:8000/api/usuarios/", JSON.stringify(postParams), {headers: headers})
-      .map(res => res.json())
-      .subscribe(data => {
-        console.log(data['_body']);
-        resolve(true);
-       }, error => {
-        console.log(error);
-        resolve(false);
-      });
-    });
-  }
-
-  authenticate(user) {
-        var creds = "name=" + user.name + "&password=" + user.password;
-        var headers = new Headers();
-        headers.append('Content-Type', 'application/x-www-form-urlencoded');
-        
-        return new Promise(resolve => {
-            this.http.post('http://localhost:3333/authenticate', creds, {headers: headers}).subscribe(data => {
-                if(data.json().success){
-                    this.storeUserCredentials(data.json().token);
-                    resolve(true);
-                }
-                else
-                    resolve(false);
-            });
+        headers.append('Authorization', 'Bearer ' +this.AuthToken);
+        this.http.get('http://localhost:3333/getinfo', {headers: headers}).subscribe(data => {
+            if(data.json().success)
+                resolve(data.json());
+            else
+                resolve(false);
         });
-  }
+    })
+}
+
+logout() {
+    this.destroyUserCredentials();
+}
 
 }

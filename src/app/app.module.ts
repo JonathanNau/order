@@ -11,6 +11,7 @@ import { Geo } from '../pages/geo/geo';
 import { TesteJson } from '../pages/teste-json/teste-json';
 import { Login } from '../pages/login/login';
 import { Signup } from '../pages/signup/signup';
+import { Categoria } from '../pages/categoria/categoria';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -22,7 +23,8 @@ import { LoginProvider } from '../providers/loginprovider';
     Geo,
     TesteJson,
     Login,
-    Signup
+    Signup,
+    Categoria
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { LoginProvider } from '../providers/loginprovider';
     Geo,
     TesteJson,
     Login,
-    Signup
+    Signup,
+    Categoria
   ],
   providers: [
     StatusBar,

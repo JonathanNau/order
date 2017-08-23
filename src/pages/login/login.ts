@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 import { Signup } from '../signup/signup';
+import { HomePage } from '../home/home';
 
 import { LoginProvider } from '../../providers/loginprovider'
 
@@ -17,14 +18,18 @@ import { LoginProvider } from '../../providers/loginprovider'
   templateUrl: 'login.html',
 })
 export class Login {
+    private usercreds : FormGroup;
     signup = Signup;
-    usercreds = {
+    /*usercreds = {
             name: '',
             password: ''
-    };
+    };*/
     jobs: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loginprovider: LoginProvider) {
-    
+  constructor(private formBuilder: FormBuilder, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public loginprovider: LoginProvider) {
+    this.usercreds = this.formBuilder.group({
+      name: ['', Validators.required],
+      password: ['', Validators.required],
+    });
   }
 
   ionViewDidLoad() {
@@ -32,15 +37,19 @@ export class Login {
   }
 
   login(user) {
-      this.loginprovider.login(user).then(data => {
-        if(data){
-          console.log('oie')
-          this.navCtrl.setRoot(Signup);
+    console.log(user.value);
+    this.loginprovider.authenticate(user).then(data => {
+        if(data) {
+            this.navCtrl.setRoot(HomePage);
         } else {
-          console.log('bye')
+          var alert = this.alertCtrl.create({
+            title: 'Falha',
+            subTitle: 'Usuário ou Senha incorretos',
+            buttons: ['ok']
+        });
+        alert.present();
         }
-      });
-      
-  }
+});
+}
 
 }

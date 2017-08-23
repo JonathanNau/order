@@ -1,18 +1,20 @@
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
-import { Geolocation } from 'ionic-native';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
 import { Geo } from '../pages/geo/geo';
+import { Categoria } from '../pages/categoria/categoria';
+import { Login } from '../pages/login/login';
+
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
-  rootPage:any = HomePage;
+  rootPage:any = Login;
 
   pages: Array<{title: string, component: any}>;
 
@@ -21,7 +23,8 @@ export class MyApp {
 
     this.pages = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: Geo }
+      { title: 'List', component: Geo },
+      { title: 'Categoria', component: Categoria }
     ];
   }
   initializeApp() {
