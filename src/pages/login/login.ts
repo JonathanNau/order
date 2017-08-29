@@ -25,11 +25,20 @@ export class Login {
             password: ''
     };*/
     jobs: any;
+    veifica_login() {
+      this.loginprovider.getinfo().then(data => {
+        if(data){
+          this.navCtrl.setRoot(HomePage);
+        }
+      })
+      console.log('teste constructor');
+    }
   constructor(private formBuilder: FormBuilder, public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public loginprovider: LoginProvider) {
     this.usercreds = this.formBuilder.group({
       name: ['', Validators.required],
       password: ['', Validators.required],
     });
+    this.veifica_login();
   }
 
   ionViewDidLoad() {

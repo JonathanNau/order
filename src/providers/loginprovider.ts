@@ -13,7 +13,7 @@ import { Json } from '../providers/json'
 export class LoginProvider {
   isLoggedin: boolean;
   AuthToken;
-  constructor(public http: Http, public json: Json) {
+  constructor(public http: Http) {
     console.log('Hello Login Provider');
     this.isLoggedin = false;
     this.AuthToken = null;
@@ -32,6 +32,11 @@ useCredentials(token) {
 loadUserCredentials() {
     var token = window.localStorage.getItem('user_order');
     this.useCredentials(token);
+}
+
+getCredentials() {
+    var token = window.localStorage.getItem('user_order');
+    return token;
 }
 
 destroyUserCredentials() {
@@ -98,12 +103,19 @@ getinfo() {
         var headers = new Headers();
         this.loadUserCredentials();
         console.log(this.AuthToken);
-        headers.append('Authorization', 'Bearer ' +this.AuthToken);
-        this.http.get('http://localhost:3333/getinfo', {headers: headers}).subscribe(data => {
-            if(data.json().success)
-                resolve(data.json());
-            else
-                resolve(false);
+        let creds = {
+            token: this.AuthToken
+        }
+        headers.append('Content-Type', 'application/json' );
+        //headers.append('Authorization', 'Bearer ' +this.AuthToken);
+        this.http.post('http://localhost:8000/api/api-token-verify/', JSON.stringify(creds), {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+            console.log(data['_body']);
+            resolve(true);
+           }, error => {
+            console.log(error);
+            resolve(false);
         });
     })
 }
