@@ -12,6 +12,7 @@ import { TesteJson } from '../pages/teste-json/teste-json';
 import { Login } from '../pages/login/login';
 import { Signup } from '../pages/signup/signup';
 import { Categoria } from '../pages/categoria/categoria';
+import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -24,7 +25,8 @@ import { LoginProvider } from '../providers/loginprovider';
     TesteJson,
     Login,
     Signup,
-    Categoria
+    Categoria,
+    DetalheItem
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,8 @@ import { LoginProvider } from '../providers/loginprovider';
     TesteJson,
     Login,
     Signup,
-    Categoria
+    Categoria,
+    DetalheItem
   ],
   providers: [
     StatusBar,
