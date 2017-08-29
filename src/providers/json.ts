@@ -2,16 +2,12 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 
-/*
-  Generated class for the Json provider.
+import { LoginProvider } from '../providers/loginprovider'
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular DI.
-*/
 @Injectable()
 export class Json {
   data: any;
-  constructor(public http: Http) {
+  constructor(public http: Http, public lp: LoginProvider) {
     console.log('Hello rapaze');
   }
 
@@ -21,6 +17,17 @@ export class Json {
 
   getUsuariosData(){
     return this.http.get('http://localhost:8000/api/usuarios/?format=json').map(res => res.json());
+  }
+
+  getCategoriaData(){
+
+      var headers = new Headers();
+      headers.append('Authorization','JWT ' +this.lp.getCredentials());
+      console.log(this.lp.getCredentials());
+      console.log(headers);
+      return this.http.get('http://localhost:8000/api/categoria/?format=json', {headers: headers})
+      .map(res => res.json())
+
   }
 
   postRequest() {
