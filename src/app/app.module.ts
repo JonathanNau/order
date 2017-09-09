@@ -8,11 +8,11 @@ import { HttpModule } from '@angular/http';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { Geo } from '../pages/geo/geo';
-import { TesteJson } from '../pages/teste-json/teste-json';
 import { Login } from '../pages/login/login';
 import { Signup } from '../pages/signup/signup';
 import { Categoria } from '../pages/categoria/categoria';
 import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
+import { DadosLoja } from '../pages/dados-loja/dados-loja';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -22,11 +22,11 @@ import { LoginProvider } from '../providers/loginprovider';
     MyApp,
     HomePage,
     Geo,
-    TesteJson,
     Login,
     Signup,
     Categoria,
-    DetalheItem
+    DetalheItem,
+    DadosLoja
   ],
   imports: [
     BrowserModule,
@@ -38,11 +38,11 @@ import { LoginProvider } from '../providers/loginprovider';
     MyApp,
     HomePage,
     Geo,
-    TesteJson,
     Login,
     Signup,
     Categoria,
-    DetalheItem
+    DetalheItem,
+    DadosLoja
   ],
   providers: [
     StatusBar,

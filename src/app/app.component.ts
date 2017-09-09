@@ -8,6 +8,7 @@ import { Geo } from '../pages/geo/geo';
 import { Categoria } from '../pages/categoria/categoria';
 import { Login } from '../pages/login/login';
 import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
+import { DadosLoja } from '../pages/dados-loja/dados-loja';
 
 import { LoginProvider } from '../providers/loginprovider'
 
@@ -20,6 +21,7 @@ export class MyApp {
   rootPage:any = Login;
 
   pages: Array<{title: string, component: any}>;
+  pages1: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private lp: LoginProvider) {
     this.initializeApp();
@@ -27,8 +29,16 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: Geo },
+      { title: 'Dados', component: DadosLoja},
       { title: 'Categoria', component: Categoria },
-      {title: 'Logout', component: null}
+      { title: 'Logout', component: null },
+    ];
+
+    this.pages1 = [
+      { title: 'Home', component: HomePage },
+      { title: 'Dados', component: DadosLoja},
+      { title: 'Categoria', component: Categoria },
+      { title: 'Logout', component: null },
     ];
   }
   initializeApp() {

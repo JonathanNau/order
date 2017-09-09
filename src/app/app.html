@@ -1,8 +1,10 @@
-<ion-menu [content]="mycontent">
+<ion-menu [content]="mycontent" id="menu1">
+    <ion-header>
+        <ion-toolbar color="secondary">
+            <ion-title>Menu ADM</ion-title>
+        </ion-toolbar>
+    </ion-header>
     <ion-content>
-        <ion-navbar>
-            <ion-title text-center>Menu</ion-title>
-          </ion-navbar>
         <ion-list>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
                 {{p.title}}
@@ -10,5 +12,22 @@
         </ion-list>
     </ion-content>
 </ion-menu>
+
+<ion-menu [content]="mycontent" id="menu2">
+    
+      <ion-header>
+        <ion-toolbar color="danger">
+          <ion-title>Menu Loja</ion-title>
+        </ion-toolbar>
+      </ion-header>
+    
+      <ion-content>
+        <ion-list>
+            <button menuClose="menu2" ion-item *ngFor="let p of pages1" (click)="openPage(p)">
+                {{p.title}}
+            </button>
+        </ion-list>
+      </ion-content>
+    </ion-menu>
 
 <ion-nav #mycontent [root]="rootPage"></ion-nav>
