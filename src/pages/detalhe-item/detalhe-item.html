@@ -14,12 +14,17 @@
 
 
 <ion-content padding>
-{{data.id}}<br>
-{{data.nome}}<br>
-{{data.loja.nome}}<br>
-{{data.loja.latitude}}<br>
-{{data.loja.longitude}}<br>
-{{data.loja.telefone}}<br>
-{{data.loja.situacao}}<br>
-{{data.situacao}}<br>
+  <form [formGroup]="dados" (ngSubmit)="alterar(data, dados)">
+      <ion-item>
+          <ion-label floating>Nome</ion-label>
+          <ion-input formControlName = "name" type="text" value={{data.nome}}></ion-input>
+      </ion-item>
+      <ion-item>
+          <ion-label>Situação</ion-label>
+          <ion-toggle formControlName = "status" checked={{data.situacao}}></ion-toggle>
+          <!--<ion-input formControlName = "password" type="text"></ion-input>-->
+      </ion-item>
+      <button ion-button type="submit">Salvar</button>
+    <button ion-button (click)="goback()">Voltar</button>
+  </form>
 </ion-content>

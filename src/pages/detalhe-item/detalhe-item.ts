@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
-/**
- * Generated class for the DetalheItem page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { Json } from '../../providers/json'
+
 @IonicPage()
 @Component({
   selector: 'page-detalhe-item',
@@ -14,11 +11,25 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class DetalheItem {
   data: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  private dados : FormGroup;
+  constructor(private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams, public json: Json) {
     this.data = this.navParams.get('categoria_data');
-    console.log(this.data);
+    this.dados = this.formBuilder.group({
+      name: [this.data.nome, Validators.required],
+      status: [this.data.situacao, Validators.required],
+    });
   }
-
+  alterar(data, dados){
+    data.nome = dados.value.name;
+    data.situacao = dados.value.status;
+    this.json.alterarCategoria(data);
+  }
+  
+  goback() {
+    this.navCtrl.pop();
+    console.log('Click on button Test Console Log');
+ }
+ 
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetalheItem');
   }
