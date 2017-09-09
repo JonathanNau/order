@@ -13,13 +13,15 @@ import { Json } from '../providers/json'
 export class LoginProvider {
   isLoggedin: boolean;
   AuthToken;
+  codigo;
   constructor(public http: Http) {
     console.log('Hello Login Provider');
     this.isLoggedin = false;
     this.AuthToken = null;
+    this.codigo = 0;
   }
   storeUserCredentials(token) {
-    window.localStorage.setItem('user_order', token);
+    window.localStorage.setItem('user_order_token', token);
     this.useCredentials(token);
     
 }
@@ -30,21 +32,47 @@ useCredentials(token) {
 }
 
 loadUserCredentials() {
-    var token = window.localStorage.getItem('user_order');
+    var token = window.localStorage.getItem('user_order_token');
     this.useCredentials(token);
 }
 
 getCredentials() {
-    var token = window.localStorage.getItem('user_order');
+    var token = window.localStorage.getItem('user_order_token');
     return token;
 }
 
 destroyUserCredentials() {
     this.isLoggedin = false;
     this.AuthToken = null;
+    this.codigo = 0;
     window.localStorage.clear();
 }
 
+salvaUser(user){
+    window.localStorage.setItem('user_order_id', user.id);
+    window.localStorage.setItem('user_order_cod', user.codigo);
+    this.codigo = user.codigo
+}
+
+loadDadosUser(creds, data){
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +data.token);
+    return new Promise(resolve => {
+        this.http.get('http://localhost:8000/api/usuarios/', {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+            for(var i = 0; i < data.length; i++) {
+                if (data[i].username == creds.username){
+                    this.salvaUser(data[i]);
+                    resolve(true);
+                }
+            }
+        }, error => {
+            console.log(error);
+            resolve(false);
+        });
+    })
+}
 authenticate(user) {
     let creds = {
       username: user.value.name,
@@ -62,7 +90,16 @@ authenticate(user) {
             if(data.token){
                 console.log('consegui')
                 this.storeUserCredentials(data.token);
-                resolve(true);
+                this.loadDadosUser(creds,data).then(data => {
+                    if(data){
+                        console.log(this.codigo);
+                        resolve(true);
+                    } else {
+                        console.log("Problema ao ler dados do Usuário");
+                        resolve(true);
+                    }
+                  });
+                
             }
             else{
                 console.log('deu ruim')
