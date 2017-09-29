@@ -18,12 +18,18 @@ import { Json } from '../../providers/json'
 export class DadosLoja {
   data_loja: any;
   private dados : FormGroup;
-
-  constructor(public navCtrl: NavController, public navParams: NavParams, private json: Json) {
+  
+  constructor(private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams, private json: Json) {
     this.json.getCategoriaData().subscribe(data => {
       this.data_loja = [];
 
       console.log(this.data_loja);
+    });
+    this.dados = this.formBuilder.group({
+      name: ['', Validators.required],
+      telefone: ['', Validators.required],
+      latitude: ['', Validators.required],
+      longitude: ['', Validators.required],
     });
   }
 

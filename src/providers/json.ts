@@ -15,7 +15,7 @@ export class Json {
   getCategoriaData(){
       var headers = new Headers();
       headers.append('Authorization','JWT ' +this.lp.getCredentials());
-      return this.http.get(this.base_url+'/categoria/?format=json', {headers: headers})
+      return this.http.get(this.base_url+'/categoria/'+this.lp.codigo+'/', {headers: headers})
       .map(res => res.json())
   }
 

@@ -22,6 +22,8 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
   pages1: Array<{title: string, component: any}>;
+  pages2: Array<{title: string, component: any}>;
+  pages3: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private lp: LoginProvider) {
     this.initializeApp();
@@ -38,6 +40,22 @@ export class MyApp {
       { title: 'Home', component: HomePage },
       { title: 'Dados', component: DadosLoja},
       { title: 'Categoria', component: Categoria },
+      { title: 'Catalogo', component: null },
+      { title: 'Logout', component: null },
+    ];
+
+    // Menu funcionario
+    this.pages2 = [
+      { title: 'Home', component: HomePage },
+      { title: 'Dados', component: null},
+      { title: 'Logout', component: null },
+    ];
+
+    // Menu cliente
+    this.pages3 = [
+      { title: 'Home', component: HomePage },
+      { title: 'Dados', component: null},
+      { title: 'Pedidos', component: null},
       { title: 'Logout', component: null },
     ];
   }

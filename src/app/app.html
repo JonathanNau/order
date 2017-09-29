@@ -14,20 +14,49 @@
 </ion-menu>
 
 <ion-menu [content]="mycontent" id="menu2">
-    
-      <ion-header>
+    <ion-header>
         <ion-toolbar color="danger">
-          <ion-title>Menu Loja</ion-title>
+            <ion-title>Menu Loja</ion-title>
         </ion-toolbar>
-      </ion-header>
-    
-      <ion-content>
+    </ion-header>
+    <ion-content>
         <ion-list>
             <button menuClose="menu2" ion-item *ngFor="let p of pages1" (click)="openPage(p)">
                 {{p.title}}
             </button>
         </ion-list>
-      </ion-content>
-    </ion-menu>
+    </ion-content>
+</ion-menu>
+
+<ion-menu [content]="mycontent" id="menu3">
+    <ion-header>
+        <ion-toolbar color="primary">
+            <ion-title>Funcionário</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <button menuClose="menu3" ion-item *ngFor="let p of pages2" (click)="openPage(p)">
+                {{p.title}}
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
+<ion-menu [content]="mycontent" id="menu4">
+    <ion-header>
+        <ion-toolbar color="light">
+            <ion-title>Cliente Especial</ion-title>
+        </ion-toolbar>
+    </ion-header>
+    <ion-content>
+        <ion-list>
+            <button menuClose="menu4" ion-item *ngFor="let p of pages3" (click)="openPage(p)">
+                {{p.title}}
+            </button>
+        </ion-list>
+    </ion-content>
+</ion-menu>
+
 
 <ion-nav #mycontent [root]="rootPage"></ion-nav>

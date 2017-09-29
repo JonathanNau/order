@@ -19,5 +19,24 @@
 
 
 <ion-content padding>
-  <h1>asdasdasd</h1>
+  <form [formGroup]="dados" (ngSubmit)="atualiza(dados)">
+    <ion-item>
+        <ion-label floating>Nome</ion-label>
+        <ion-input formControlName = "name" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Telefone</ion-label>
+      <ion-input formControlName = "telefone" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Latitude</ion-label>
+      <ion-input formControlName = "latitude" floating></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label floating>Longitude</ion-label>
+      <ion-input formControlName = "longitude" floating></ion-input>
+    </ion-item>
+    <button ion-button type="submit">Atualizar</button>
+    <button ion-button (click)="goback()">Voltar</button>
+</form> 
 </ion-content>
