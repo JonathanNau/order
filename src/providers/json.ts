@@ -32,6 +32,14 @@ export class Json {
       console.log(error);
     });
   }
+
+  getLojasData(){
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return this.http.get(this.base_url+'/lojas/', {headers: headers})
+    .map(res => res.json())
+  }
+
 /*
   getData(){
     return this.http.get('http://localhost:8000/api/usuarios/?format=json').map(res => res.json());

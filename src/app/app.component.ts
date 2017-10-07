@@ -4,11 +4,13 @@ import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { HomePage } from '../pages/home/home';
+import { HomeCliente } from '../pages/home-cliente/home-cliente';
 import { Geo } from '../pages/geo/geo';
 import { Categoria } from '../pages/categoria/categoria';
 import { Login } from '../pages/login/login';
 import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
 import { DadosLoja } from '../pages/dados-loja/dados-loja';
+import { DadosCliente } from '../pages/dados-cliente/dados-cliente';
 
 import { LoginProvider } from '../providers/loginprovider'
 
@@ -20,15 +22,16 @@ export class MyApp {
 
   rootPage:any = Login;
 
-  pages: Array<{title: string, component: any}>;
-  pages1: Array<{title: string, component: any}>;
-  pages2: Array<{title: string, component: any}>;
-  pages3: Array<{title: string, component: any}>;
+  pagesAdministrador: Array<{title: string, component: any}>;
+  pagesLoja: Array<{title: string, component: any}>;
+  pagesFuncionario: Array<{title: string, component: any}>;
+  pagesCliente: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private lp: LoginProvider) {
     this.initializeApp();
 
-    this.pages = [
+    // Menu adm
+    this.pagesAdministrador = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: Geo },
       { title: 'Dados', component: DadosLoja},
@@ -36,7 +39,8 @@ export class MyApp {
       { title: 'Logout', component: null },
     ];
 
-    this.pages1 = [
+    //menu loja
+    this.pagesLoja = [
       { title: 'Home', component: HomePage },
       { title: 'Dados', component: DadosLoja},
       { title: 'Categoria', component: Categoria },
@@ -45,16 +49,16 @@ export class MyApp {
     ];
 
     // Menu funcionario
-    this.pages2 = [
+    this.pagesFuncionario = [
       { title: 'Home', component: HomePage },
       { title: 'Dados', component: null},
       { title: 'Logout', component: null },
     ];
 
     // Menu cliente
-    this.pages3 = [
-      { title: 'Home', component: HomePage },
-      { title: 'Dados', component: null},
+    this.pagesCliente = [
+      { title: 'Home', component: HomeCliente },
+      { title: 'Dados', component: DadosCliente },
       { title: 'Pedidos', component: null},
       { title: 'Logout', component: null },
     ];

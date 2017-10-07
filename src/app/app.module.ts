@@ -7,12 +7,14 @@ import { HttpModule } from '@angular/http';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
+import { HomeCliente } from '../pages/home-cliente/home-cliente';
 import { Geo } from '../pages/geo/geo';
 import { Login } from '../pages/login/login';
 import { Signup } from '../pages/signup/signup';
 import { Categoria } from '../pages/categoria/categoria';
 import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
 import { DadosLoja } from '../pages/dados-loja/dados-loja';
+import { DadosCliente } from '../pages/dados-cliente/dados-cliente';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -21,12 +23,14 @@ import { LoginProvider } from '../providers/loginprovider';
   declarations: [
     MyApp,
     HomePage,
+    HomeCliente,
     Geo,
     Login,
     Signup,
     Categoria,
     DetalheItem,
-    DadosLoja
+    DadosLoja,
+    DadosCliente
   ],
   imports: [
     BrowserModule,
@@ -37,12 +41,14 @@ import { LoginProvider } from '../providers/loginprovider';
   entryComponents: [
     MyApp,
     HomePage,
+    HomeCliente,
     Geo,
     Login,
     Signup,
     Categoria,
     DetalheItem,
-    DadosLoja
+    DadosLoja,
+    DadosCliente
   ],
   providers: [
     StatusBar,

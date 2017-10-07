@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/add/operator/map';
 import { Json } from '../providers/json'
+import { MenuController } from 'ionic-angular';
 
 /*
   Generated class for the Login provider.
@@ -14,7 +15,7 @@ export class LoginProvider {
   isLoggedin: boolean;
   AuthToken;
   codigo;
-  constructor(public http: Http) {
+  constructor(public http: Http, public menu: MenuController) {
     console.log('Hello Login Provider');
     this.isLoggedin = false;
     this.AuthToken = null;
@@ -158,6 +159,7 @@ getinfo() {
 }
 
 logout() {
+    this.menu.enable(false, this.menu.getOpen().id);
     this.destroyUserCredentials();
 }
 

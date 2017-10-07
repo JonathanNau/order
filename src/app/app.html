@@ -1,4 +1,4 @@
-<ion-menu [content]="mycontent" id="menu1">
+<ion-menu [content]="mycontent" id="menuAdministrador">
     <ion-header>
         <ion-toolbar color="secondary">
             <ion-title>Menu ADM</ion-title>
@@ -6,14 +6,14 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+            <button menuClose="menuAdministrador" ion-item *ngFor="let p of pagesAdministrador" (click)="openPage(p)">
                 {{p.title}}
             </button>
         </ion-list>
     </ion-content>
 </ion-menu>
 
-<ion-menu [content]="mycontent" id="menu2">
+<ion-menu [content]="mycontent" id="menuLoja">
     <ion-header>
         <ion-toolbar color="danger">
             <ion-title>Menu Loja</ion-title>
@@ -21,14 +21,14 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button menuClose="menu2" ion-item *ngFor="let p of pages1" (click)="openPage(p)">
+            <button menuClose="menuLoja" ion-item *ngFor="let p of pagesLoja" (click)="openPage(p)">
                 {{p.title}}
             </button>
         </ion-list>
     </ion-content>
 </ion-menu>
 
-<ion-menu [content]="mycontent" id="menu3">
+<ion-menu [content]="mycontent" id="menuFuncionario">
     <ion-header>
         <ion-toolbar color="primary">
             <ion-title>Funcionário</ion-title>
@@ -36,14 +36,14 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button menuClose="menu3" ion-item *ngFor="let p of pages2" (click)="openPage(p)">
+            <button menuClose="menuFuncionario" ion-item *ngFor="let p of pagesFuncionario" (click)="openPage(p)">
                 {{p.title}}
             </button>
         </ion-list>
     </ion-content>
 </ion-menu>
 
-<ion-menu [content]="mycontent" id="menu4">
+<ion-menu [content]="mycontent" id="menuCliente">
     <ion-header>
         <ion-toolbar color="light">
             <ion-title>Cliente Especial</ion-title>
@@ -51,7 +51,7 @@
     </ion-header>
     <ion-content>
         <ion-list>
-            <button menuClose="menu4" ion-item *ngFor="let p of pages3" (click)="openPage(p)">
+            <button menuClose="menuCliente" ion-item *ngFor="let p of pagesCliente" (click)="openPage(p)">
                 {{p.title}}
             </button>
         </ion-list>
