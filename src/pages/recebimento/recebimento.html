@@ -5,14 +5,17 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-title>recebimento</ion-title>
+    <ion-title text-center>Forma de Recebimento</ion-title>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-
+  <h3 text-center>Selecione uma forma de receber seus produtos</h3>
+  <ion-list>
+    <button ion-item *ngFor="let recebimento of recebimentos" (click)="itemSelected(recebimento)" detail-push>
+      {{recebimento.nome}}
+    </button>
+  </ion-list>
 </ion-content>

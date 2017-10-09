@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { Recebimento } from '../recebimento/recebimento';
 
 import { Json } from '../../providers/json'
 /**
@@ -30,7 +31,8 @@ export class HomeCliente {
   }
 
   itemSelected(loja){
-    //Iniciar pedido, próximo passo (escolher forma de recebimento)
+    //Falta salvar pedido
+    this.navCtrl.push(Recebimento);
   }
   
   ionViewDidLoad() {

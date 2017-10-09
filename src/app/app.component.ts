@@ -11,6 +11,7 @@ import { Login } from '../pages/login/login';
 import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
 import { DadosLoja } from '../pages/dados-loja/dados-loja';
 import { DadosCliente } from '../pages/dados-cliente/dados-cliente';
+import { Recebimento } from '../pages/recebimento/recebimento';
 
 import { LoginProvider } from '../providers/loginprovider'
 

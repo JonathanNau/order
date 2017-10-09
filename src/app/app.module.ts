@@ -15,6 +15,10 @@ import { Categoria } from '../pages/categoria/categoria';
 import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
 import { DadosLoja } from '../pages/dados-loja/dados-loja';
 import { DadosCliente } from '../pages/dados-cliente/dados-cliente';
+import { Recebimento } from '../pages/recebimento/recebimento';
+import { TabsPage } from '../pages/tabs-page/tabs-page';
+import { Comida } from '../pages/comida/comida';
+import { Bebida } from '../pages/bebida/bebida';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -30,7 +34,11 @@ import { LoginProvider } from '../providers/loginprovider';
     Categoria,
     DetalheItem,
     DadosLoja,
-    DadosCliente
+    DadosCliente,
+    Recebimento,
+    TabsPage,
+    Comida,
+    Bebida
   ],
   imports: [
     BrowserModule,
@@ -48,7 +56,11 @@ import { LoginProvider } from '../providers/loginprovider';
     Categoria,
     DetalheItem,
     DadosLoja,
-    DadosCliente
+    DadosCliente,
+    Recebimento,
+    TabsPage,
+    Comida,
+    Bebida
   ],
   providers: [
     StatusBar,
