@@ -21,6 +21,7 @@ import { Comida } from '../pages/comida/comida';
 import { Bebida } from '../pages/bebida/bebida';
 import { Checkout } from '../pages/checkout/checkout';
 import { HistoricoPedidos } from '../pages/historico-pedidos/historico-pedidos';
+import { DetalhePedido } from '../pages/detalhe-pedido/detalhe-pedido';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -42,7 +43,8 @@ import { LoginProvider } from '../providers/loginprovider';
     Comida,
     Bebida,
     Checkout,
-    HistoricoPedidos
+    HistoricoPedidos,
+    DetalhePedido
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ import { LoginProvider } from '../providers/loginprovider';
     Comida,
     Bebida,
     Checkout,
-    HistoricoPedidos
+    HistoricoPedidos,
+    DetalhePedido
   ],
   providers: [
     StatusBar,

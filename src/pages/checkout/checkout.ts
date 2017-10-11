@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
 
 import { HistoricoPedidos } from '../historico-pedidos/historico-pedidos';
 
@@ -10,7 +10,7 @@ import { HistoricoPedidos } from '../historico-pedidos/historico-pedidos';
 })
 export class Checkout {
   public produtos;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public appCtrl: App, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public viewCtrl: ViewController) {
     this.produtos = [
       { nome: "x-salada", quantidade: 3},
       { nome: "Dog Calabresa", quantidade: 2},
@@ -25,7 +25,7 @@ export class Checkout {
         {
           text: 'Ok',
           handler: data => {
-            this.navCtrl.push(HistoricoPedidos);
+            this.navCtrl.setRoot(HistoricoPedidos);
           }
         }
       ]

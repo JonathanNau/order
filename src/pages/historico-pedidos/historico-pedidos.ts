@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
+import { DetalhePedido } from '../detalhe-pedido/detalhe-pedido';
+
 /**
  * Generated class for the HistoricoPedidos page.
  *
@@ -22,7 +24,7 @@ export class HistoricoPedidos {
     ];
   }
   itemSelected(comida){
-    //Detalhe do item
+    this.navCtrl.push(DetalhePedido, 'oi');
   }
 
   ionViewDidLoad() {

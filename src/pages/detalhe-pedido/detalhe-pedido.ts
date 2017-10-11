@@ -13,8 +13,17 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'detalhe-pedido.html',
 })
 export class DetalhePedido {
-
+  public produtos;
+  public loja;
+  public valor;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+  this.loja = 'Italiano';
+  this.valor = '145,00';
+    this.produtos = [
+      { nome: "x-salada", quantidade: 3},
+      { nome: "Dog Calabresa", quantidade: 2},
+      { nome: "Coca", quantidade: 5}
+    ];
   }
 
   ionViewDidLoad() {

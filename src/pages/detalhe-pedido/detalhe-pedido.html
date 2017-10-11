@@ -7,12 +7,24 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>detalhe-pedido</ion-title>
+    <ion-title text-center>Detalhe do Pedido</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+  
+  <ion-list> 
+    <h3>Loja: {{loja}}</h3>
+    <button ion-item *ngFor="let produto of produtos" (click)="itemSelected(produto)" detail-push>
+      {{produto.nome}}
+      <h3 item-end>Quantidade: {{produto.quantidade}}</h3>
+    </button>
+  </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <h2 text-center>Valor total: R$ {{valor}}</h2>
+  </ion-toolbar>
+</ion-footer>
