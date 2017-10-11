@@ -9,7 +9,7 @@
   <ion-navbar>
     <ion-title text-center>Comida</ion-title>
     <ion-buttons right>
-      <button ion-button icon-only>
+      <button ion-button icon-only (click)="checkout()">
           <ion-icon name="cart"></ion-icon>
       </button>
     </ion-buttons>
@@ -27,10 +27,3 @@
 
 </ion-content>
 
-<ion-footer>
-    <ion-toolbar>
-        <button ion-button full (click)="checkout()" detail-push>
-            Finalizar pedido
-          </button>
-    </ion-toolbar>
-  </ion-footer>

@@ -19,9 +19,9 @@ export class DadosCliente {
       console.log(this.data_cliente);
     });
     this.dados = this.formBuilder.group({
-      name: ['', Validators.required],
-      email: ['', Validators.required],
-      telefone: ['', Validators.required],
+      name: ['Jonathan Nau', Validators.required],
+      email: ['jonathan_nau@live.com', Validators.required],
+      telefone: ['996945810', Validators.required],
     });
   }
 

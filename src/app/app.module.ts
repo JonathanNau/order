@@ -19,6 +19,8 @@ import { Recebimento } from '../pages/recebimento/recebimento';
 import { TabsPage } from '../pages/tabs-page/tabs-page';
 import { Comida } from '../pages/comida/comida';
 import { Bebida } from '../pages/bebida/bebida';
+import { Checkout } from '../pages/checkout/checkout';
+import { HistoricoPedidos } from '../pages/historico-pedidos/historico-pedidos';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -38,12 +40,16 @@ import { LoginProvider } from '../providers/loginprovider';
     Recebimento,
     TabsPage,
     Comida,
-    Bebida
+    Bebida,
+    Checkout,
+    HistoricoPedidos
   ],
   imports: [
     BrowserModule,
     HttpModule,
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp, {
+      tabsHideOnSubPages: true
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -60,7 +66,9 @@ import { LoginProvider } from '../providers/loginprovider';
     Recebimento,
     TabsPage,
     Comida,
-    Bebida
+    Bebida,
+    Checkout,
+    HistoricoPedidos
   ],
   providers: [
     StatusBar,

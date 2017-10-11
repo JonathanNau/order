@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 
 import { Recebimento } from '../recebimento/recebimento';
 
@@ -17,7 +17,17 @@ import { Json } from '../../providers/json'
 })
 export class HomeCliente {
   lojas: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public json: Json) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public json: Json, public loadingCtrl: LoadingController) {
+    const loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+  
+    loading.present();
+  
+    setTimeout(() => {
+      loading.dismiss();
+    }, 1000);
+
     this.json.getLojasData().subscribe(data => {
       this.lojas = [];
       for(var i = 0; i < data.length; i++) {         
@@ -28,6 +38,8 @@ export class HomeCliente {
         );
       }
     });
+
+    
   }
 
   itemSelected(loja){

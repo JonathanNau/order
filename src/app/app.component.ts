@@ -12,6 +12,7 @@ import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
 import { DadosLoja } from '../pages/dados-loja/dados-loja';
 import { DadosCliente } from '../pages/dados-cliente/dados-cliente';
 import { Recebimento } from '../pages/recebimento/recebimento';
+import { HistoricoPedidos } from '../pages/historico-pedidos/historico-pedidos';
 
 import { LoginProvider } from '../providers/loginprovider'
 
@@ -60,7 +61,7 @@ export class MyApp {
     this.pagesCliente = [
       { title: 'Home', component: HomeCliente },
       { title: 'Dados', component: DadosCliente },
-      { title: 'Pedidos', component: null},
+      { title: 'Pedidos', component: HistoricoPedidos},
       { title: 'Logout', component: null },
     ];
   }

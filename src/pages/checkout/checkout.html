@@ -14,5 +14,17 @@
 
 
 <ion-content padding>
-
+  <ion-list> 
+    <button ion-item *ngFor="let produto of produtos" (click)="itemSelected(produto)" detail-push>
+      {{produto.nome}}
+      <h3 item-end>Quantidade: {{produto.quantidade}}</h3>
+    </button>
+  </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <button ion-button full (click)="checkout()" detail-push>
+          Finalizar pedido
+        </button>
+  </ion-toolbar>
+</ion-footer>
