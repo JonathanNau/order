@@ -1,0 +1,34 @@
+<!--
+  Generated template for the Funcionarios page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Funcionarios</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+      <button ion-item *ngFor="let funcionario of funcionarios" (click)="itemSelected(funcionario)" detail-push>
+        {{funcionario.nome}}
+      </button>
+  </ion-list>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button full (click)="novo_funcionario()" detail-push>
+          Novo Funcionário
+        </button>
+    </ion-toolbar>
+  </ion-footer>

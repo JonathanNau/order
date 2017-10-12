@@ -16,13 +16,16 @@ export class DetalhePedido {
   public produtos;
   public loja;
   public valor;
+  public status;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   this.loja = 'Italiano';
-  this.valor = '145,00';
+  this.valor = '41,00';
+  this.status = 'Em andamento'
     this.produtos = [
-      { nome: "x-salada", quantidade: 3},
-      { nome: "Dog Calabresa", quantidade: 2},
-      { nome: "Coca", quantidade: 5}
+      { nome: "Dog Alcatra", quantidade: 1},
+      { nome: "Dog Calabresa", quantidade: 1},
+      { nome: "Coca-cola", quantidade: 2}
     ];
   }
 

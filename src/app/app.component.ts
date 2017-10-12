@@ -13,6 +13,9 @@ import { DadosLoja } from '../pages/dados-loja/dados-loja';
 import { DadosCliente } from '../pages/dados-cliente/dados-cliente';
 import { Recebimento } from '../pages/recebimento/recebimento';
 import { HistoricoPedidos } from '../pages/historico-pedidos/historico-pedidos';
+import { TabsPage } from '../pages/tabs-page/tabs-page';
+import { Produtos } from '../pages/produtos/produtos';
+import { Funcionarios } from '../pages/funcionarios/funcionarios';
 
 import { LoginProvider } from '../providers/loginprovider'
 
@@ -45,15 +48,17 @@ export class MyApp {
     this.pagesLoja = [
       { title: 'Home', component: HomePage },
       { title: 'Dados', component: DadosLoja},
+      { title: 'Funcionarios', component: Funcionarios},
       { title: 'Categoria', component: Categoria },
-      { title: 'Catalogo', component: null },
+      { title: 'Produtos', component: Produtos },
+      { title: 'Catalogo', component: TabsPage },
       { title: 'Logout', component: null },
     ];
 
     // Menu funcionario
     this.pagesFuncionario = [
       { title: 'Home', component: HomePage },
-      { title: 'Dados', component: null},
+      { title: 'Dados', component: DadosCliente},
       { title: 'Logout', component: null },
     ];
 

@@ -22,6 +22,7 @@
   <ion-list>
     <button ion-item *ngFor="let comida of comidas" (click)="itemSelected(comida)" detail-push>
       {{comida.nome}}
+      <h3 item-end>R$ {{comida.valor}}</h3>
     </button>
   </ion-list>
 

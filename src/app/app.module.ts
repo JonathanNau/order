@@ -22,6 +22,10 @@ import { Bebida } from '../pages/bebida/bebida';
 import { Checkout } from '../pages/checkout/checkout';
 import { HistoricoPedidos } from '../pages/historico-pedidos/historico-pedidos';
 import { DetalhePedido } from '../pages/detalhe-pedido/detalhe-pedido';
+import { Produtos } from '../pages/produtos/produtos';
+import { DetalheProduto } from '../pages/detalhe-produto/detalhe-produto';
+import { Funcionarios } from '../pages/funcionarios/funcionarios';
+import { DetalhesFuncionario } from '../pages/detalhes-funcionario/detalhes-funcionario';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -44,7 +48,11 @@ import { LoginProvider } from '../providers/loginprovider';
     Bebida,
     Checkout,
     HistoricoPedidos,
-    DetalhePedido
+    DetalhePedido,
+    Produtos,
+    DetalheProduto,
+    Funcionarios,
+    DetalhesFuncionario
   ],
   imports: [
     BrowserModule,
@@ -71,7 +79,11 @@ import { LoginProvider } from '../providers/loginprovider';
     Bebida,
     Checkout,
     HistoricoPedidos,
-    DetalhePedido
+    DetalhePedido,
+    Produtos,
+    DetalheProduto,
+    Funcionarios,
+    DetalhesFuncionario
   ],
   providers: [
     StatusBar,

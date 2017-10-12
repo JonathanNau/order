@@ -18,8 +18,18 @@ export class Comida {
   private alert1 = null;
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.comidas = [
-      { nome: "comida1", icon: "home" },
-      { nome: "comida2", icon: "information-circle" }
+      { nome: "Dog Atum", valor: "17,00", icon: "home" },
+      { nome: "Dog Alcatra", valor: "19,00", icon: "home" },
+      { nome: "Dog Azeitona", valor: "12,00", icon: "home" },
+      { nome: "Dog Bauru", valor: "10,00", icon: "home" },
+      { nome: "Dog Bacon", valor: "14,00", icon: "home" },
+      { nome: "Dog Brócolis", valor: "12,00", icon: "home" },
+      { nome: "Dog Calabresa", valor: "13,00", icon: "home" },
+      { nome: "Dog Coração", valor: "15,00", icon: "home" },
+      { nome: "Dog Egg", valor: "12,00", icon: "home" },
+      { nome: "Dog Frango ao Molho", valor: "13,00", icon: "home" },
+      { nome: "Dog Frango Crispy", valor: "14,00", icon: "home" },
+
     ];
   }
   itemSelected(comida){

@@ -18,6 +18,7 @@
   <ion-list>
     <button ion-item *ngFor="let bebida of bebidas" (click)="itemSelected(bebida)" detail-push>
       {{bebida.nome}}
+      <h3 item-end>R$ {{bebida.valor}}</h3>
     </button>
   </ion-list>
 </ion-content>

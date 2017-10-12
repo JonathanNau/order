@@ -26,10 +26,10 @@ export class DadosLoja {
       console.log(this.data_loja);
     });
     this.dados = this.formBuilder.group({
-      name: ['', Validators.required],
-      telefone: ['', Validators.required],
-      latitude: ['', Validators.required],
-      longitude: ['', Validators.required],
+      name: ['Italiano', Validators.required],
+      telefone: ['30441400', Validators.required],
+      latitude: ['-27.092699', Validators.required],
+      longitude: ['-48.914541', Validators.required],
     });
   }
 

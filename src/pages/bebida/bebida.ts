@@ -16,8 +16,17 @@ export class Bebida {
   public bebidas;
   constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     this.bebidas = [
-      { nome: "bebida1", icon: "home" },
-      { nome: "bebida2", icon: "information-circle" }
+      { nome: "Coca-cola", valor: "4,50", icon: "home" },
+      { nome: "Pepsi", valor: "4,50", icon: "home" },
+      { nome: "Sprite", valor: "4,50", icon: "home" },
+      { nome: "Guaraná Antarctica", valor: "4,50", icon: "home" },
+      { nome: "Skol Lata", valor: "5,00", icon: "home" },
+      { nome: "Skol 600ml", valor: "10,00", icon: "home" },
+      { nome: "Torre 1,5L", valor: "35,00", icon: "home" },
+      { nome: "Torre 2,5L", valor: "49,00", icon: "home" },
+      { nome: "Raiska", valor: "7,00", icon: "home" },
+      { nome: "Passport", valor: "10,00", icon: "home" },
+      { nome: "Johnie Walker Red", valor: "15,00", icon: "home" },
     ];
   }
   itemSelected(bebida){
