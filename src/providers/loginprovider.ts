@@ -15,11 +15,15 @@ export class LoginProvider {
   isLoggedin: boolean;
   AuthToken;
   codigo;
+  id;
+  loja; //salvar código da loja quando usuário for do tipo loja
   constructor(public http: Http, public menu: MenuController) {
     console.log('Hello Login Provider');
     this.isLoggedin = false;
     this.AuthToken = null;
     this.codigo = 0;
+    this.id = 0;
+    this.loja = 0;
   }
   storeUserCredentials(token) {
     window.localStorage.setItem('user_order_token', token);
@@ -52,6 +56,8 @@ destroyUserCredentials() {
 salvaUser(user){
     window.localStorage.setItem('user_order_id', user.id);
     window.localStorage.setItem('user_order_cod', user.codigo);
+    console.log('salvo id='+ user.id + ', codigo=' + user.codigo);
+    this.id = user.id
     this.codigo = user.codigo
 }
 
@@ -67,6 +73,24 @@ loadDadosUser(creds, data){
                     this.salvaUser(data[i]);
                     resolve(true);
                 }
+            }
+        }, error => {
+            console.log(error);
+            resolve(false);
+        });
+    })
+}
+
+loadDadosLoja(data){
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +this.AuthToken);
+    return new Promise(resolve => {
+        this.http.get('http://localhost:8000/api/lojausuario/'+this.id+'/', {headers: headers})
+        .map(res => res.json())
+        .subscribe(data => {
+            if (data){
+                console.log('Código da loja salvo, código = ' + data.loja.id);
+                this.loja = data.loja.id
             }
         }, error => {
             console.log(error);
@@ -94,6 +118,9 @@ authenticate(user) {
                 this.loadDadosUser(creds,data).then(data => {
                     if(data){
                         console.log(this.codigo);
+                        if (this.codigo == 1){
+                            this.loadDadosLoja(data);
+                        }
                         resolve(true);
                     } else {
                         console.log("Problema ao ler dados do Usuário");

@@ -15,16 +15,38 @@ export class Json {
   getCategoriaData(){
       var headers = new Headers();
       headers.append('Authorization','JWT ' +this.lp.getCredentials());
-      return this.http.get(this.base_url+'/categoria/'+this.lp.codigo+'/', {headers: headers})
+      return this.http.get(this.base_url+'/categoria/'+this.lp.loja+'/', {headers: headers})
       .map(res => res.json())
   }
+
+  getProdutosData(){
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return this.http.get(this.base_url+'/produto/'+this.lp.loja+'/', {headers: headers})
+    .map(res => res.json())
+}
 
   alterarCategoria(data){
     let headers = new Headers();
     headers.append('Content-Type', 'application/json' );
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
-
+    //problema para atualizar dado
     return this.http.put(this.base_url+'/categoria/'+data.id+'/', data, {headers: headers})
+    .map(res => res.json())
+    .subscribe(data => {
+      console.log(data['_body']);
+      }, error => {
+      console.log(error);
+    });
+  }
+
+  novaCategoria(data){
+    console.log('chamei Nova categoria');
+    data.loja1 = this.lp.loja;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return this.http.post(this.base_url+'/categoria/', data, {headers: headers})
     .map(res => res.json())
     .subscribe(data => {
       console.log(data['_body']);

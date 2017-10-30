@@ -12,7 +12,7 @@ import { Geo } from '../pages/geo/geo';
 import { Login } from '../pages/login/login';
 import { Signup } from '../pages/signup/signup';
 import { Categoria } from '../pages/categoria/categoria';
-import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
+import { DetalheCategoria } from '../pages/detalhe-categoria/detalhe-categoria';
 import { DadosLoja } from '../pages/dados-loja/dados-loja';
 import { DadosCliente } from '../pages/dados-cliente/dados-cliente';
 import { Recebimento } from '../pages/recebimento/recebimento';
@@ -39,7 +39,7 @@ import { LoginProvider } from '../providers/loginprovider';
     Login,
     Signup,
     Categoria,
-    DetalheItem,
+    DetalheCategoria,
     DadosLoja,
     DadosCliente,
     Recebimento,
@@ -70,7 +70,7 @@ import { LoginProvider } from '../providers/loginprovider';
     Login,
     Signup,
     Categoria,
-    DetalheItem,
+    DetalheCategoria,
     DadosLoja,
     DadosCliente,
     Recebimento,

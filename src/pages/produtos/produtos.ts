@@ -3,6 +3,8 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { DetalheProduto } from '../detalhe-produto/detalhe-produto';
 
+import { Json } from '../../providers/json'
+
 @IonicPage()
 @Component({
   selector: 'page-produtos',
@@ -10,34 +12,28 @@ import { DetalheProduto } from '../detalhe-produto/detalhe-produto';
 })
 export class Produtos {
   public produtos;
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
-  this.produtos = [
-    { nome: "Dog Atum", valor: "17,00", icon: "home" },
-    { nome: "Dog Alcatra", valor: "19,00", icon: "home" },
-    { nome: "Dog Azeitona", valor: "12,00", icon: "home" },
-    { nome: "Dog Bauru", valor: "10,00", icon: "home" },
-    { nome: "Dog Bacon", valor: "14,00", icon: "home" },
-    { nome: "Dog Brócolis", valor: "12,00", icon: "home" },
-    { nome: "Dog Calabresa", valor: "13,00", icon: "home" },
-    { nome: "Dog Coração", valor: "15,00", icon: "home" },
-    { nome: "Dog Egg", valor: "12,00", icon: "home" },
-    { nome: "Dog Frango ao Molho", valor: "13,00", icon: "home" },
-    { nome: "Dog Frango Crispy", valor: "14,00", icon: "home" },
-    { nome: "Coca-cola", valor: "4,50", icon: "home" },
-    { nome: "Pepsi", valor: "4,50", icon: "home" },
-    { nome: "Sprite", valor: "4,50", icon: "home" },
-    { nome: "Guaraná Antarctica", valor: "4,50", icon: "home" },
-    { nome: "Skol Lata", valor: "5,00", icon: "home" },
-    { nome: "Skol 600ml", valor: "10,00", icon: "home" },
-    { nome: "Torre 1,5L", valor: "35,00", icon: "home" },
-    { nome: "Torre 2,5L", valor: "49,00", icon: "home" },
-    { nome: "Raiska", valor: "7,00", icon: "home" },
-    { nome: "Passport", valor: "10,00", icon: "home" },
-    { nome: "Johnie Walker Red", valor: "15,00", icon: "home" },
-  ];
+  constructor(public navCtrl: NavController, public navParams: NavParams, private json: Json) {
+    this.json.getProdutosData().subscribe(data => {
+      this.produtos = [];
+
+      for(var i = 0; i < data.length; i++) {
+                  
+        this.produtos.push(
+          {
+            produto_data: data[i]
+          }
+        );
+      }
+      console.log(this.produtos);
+    });
   }
+
   itemSelected(produto){
-    this.navCtrl.push(DetalheProduto);
+    this.navCtrl.push(DetalheProduto, produto);
+  }
+
+  novo_produto(produto){
+    this.navCtrl.push(DetalheProduto, {produto_data: 1});
   }
 
   ionViewDidLoad() {

@@ -22,6 +22,7 @@ export class DadosCliente {
       name: ['Jonathan Nau', Validators.required],
       email: ['jonathan_nau@live.com', Validators.required],
       telefone: ['996945810', Validators.required],
+      senha: ['123456', Validators.required],
     });
   }
 

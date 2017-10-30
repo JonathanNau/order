@@ -18,11 +18,17 @@
     <ion-item>
         <ion-label floating>Categoria</ion-label>
         <ion-select formControlName = "categoria">
-            <ion-option value="comida">Comida</ion-option>
-            <ion-option value="bebidas">Bebidas</ion-option>
-          </ion-select>
+            <ion-option *ngFor="let categoria of categorias" value={{categoria.categoria_data.nome}}>{{categoria.categoria_data.nome}}</ion-option>
+        </ion-select>
     </ion-item>
-    
+
+  <!--
+    <ion-item>
+      <ion-label floating>Categoria</ion-label>
+      <ion-input formControlName = "categoria" type="text"></ion-input>
+    </ion-item>
+  -->
+
     <ion-item>
         <ion-label floating>Nome</ion-label>
         <ion-input formControlName = "nome" type="text"></ion-input>
@@ -34,9 +40,8 @@
     <ion-item>
         <ion-label>Situação</ion-label>
         <ion-toggle formControlName = "status"></ion-toggle>
-        <!--<ion-input formControlName = "password" type="text"></ion-input>-->
     </ion-item>
     <button ion-button full type="submit">Salvar</button>
-    <button ion-button full (click)="goback()">Voltar</button>
   </form>
+  <button ion-button full (click)="goback()">Voltar</button>
 </ion-content>

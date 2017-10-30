@@ -32,7 +32,12 @@
       <ion-label floating>Telefone</ion-label>
       <ion-input formControlName = "telefone" type="text"></ion-input>
     </ion-item>
+    <ion-item>
+      <ion-label floating>Senha</ion-label>
+      <ion-input formControlName = "senha" type="password"></ion-input>
+    </ion-item>
     <button ion-button full type="submit">Atualizar</button>
+    <button ion-button full (click)="goback()">Voltar</button>
   </form> 
 </ion-content>
   

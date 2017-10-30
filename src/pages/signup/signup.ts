@@ -37,5 +37,8 @@ export class Signup {
     });
     console.log(user)
   }
-
+  goback() {
+    this.navCtrl.pop();
+    console.log('Click para voltar aos produtos');
+ }
 }

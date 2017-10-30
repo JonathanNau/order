@@ -12,17 +12,23 @@
             <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
           </button>
         </ion-buttons>
-    <ion-title>categoria</ion-title>
+    <ion-title text-center>Categorias</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <h2>Lista de Itens</h2>
   <ion-list>
     <button ion-item *ngFor="let categoria of categorias" (click)="itemSelected(categoria)" detail-push>
       {{categoria.categoria_data.nome}}
     </button>
 </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <button ion-button full (click)="nova_categoria()" detail-push>
+        Nova Categoria
+      </button>
+  </ion-toolbar>
+</ion-footer>

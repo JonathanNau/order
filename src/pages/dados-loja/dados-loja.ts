@@ -27,9 +27,11 @@ export class DadosLoja {
     });
     this.dados = this.formBuilder.group({
       name: ['Italiano', Validators.required],
+      email: ['italiano@hotmail.com', Validators.required],
       telefone: ['30441400', Validators.required],
       latitude: ['-27.092699', Validators.required],
       longitude: ['-48.914541', Validators.required],
+      senha: ['123456', Validators.required],
     });
   }
 

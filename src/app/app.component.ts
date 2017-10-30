@@ -8,7 +8,7 @@ import { HomeCliente } from '../pages/home-cliente/home-cliente';
 import { Geo } from '../pages/geo/geo';
 import { Categoria } from '../pages/categoria/categoria';
 import { Login } from '../pages/login/login';
-import { DetalheItem } from '../pages/detalhe-item/detalhe-item';
+import { DetalheCategoria } from '../pages/detalhe-categoria/detalhe-categoria';
 import { DadosLoja } from '../pages/dados-loja/dados-loja';
 import { DadosCliente } from '../pages/dados-cliente/dados-cliente';
 import { Recebimento } from '../pages/recebimento/recebimento';
@@ -38,7 +38,6 @@ export class MyApp {
     // Menu adm
     this.pagesAdministrador = [
       { title: 'Home', component: HomePage },
-      { title: 'List', component: Geo },
       { title: 'Dados', component: DadosLoja},
       { title: 'Categoria', component: Categoria },
       { title: 'Logout', component: null },

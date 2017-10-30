@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Json } from '../../providers/json'
-import { DetalheItem } from '../detalhe-item/detalhe-item';
+import { DetalheCategoria } from '../detalhe-categoria/detalhe-categoria';
 
 @IonicPage()
 @Component({
@@ -32,7 +32,11 @@ export class Categoria {
   }
 
   itemSelected(categoria){
-    this.navCtrl.push(DetalheItem, categoria);
+    this.navCtrl.push(DetalheCategoria, categoria);
+  }
+
+  nova_categoria(){
+    this.navCtrl.push(DetalheCategoria, {categoria_data: 1});
   }
 
 }

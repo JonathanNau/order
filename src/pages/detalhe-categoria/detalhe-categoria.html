@@ -7,14 +7,14 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>detalhe-item</ion-title>
+    <ion-title text-center>Detalhe Categoria</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <form [formGroup]="dados" (ngSubmit)="alterar(data, dados)">
+  <form [formGroup]="dados" (ngSubmit)="chama(data, dados)">
       <ion-item>
           <ion-label floating>Nome</ion-label>
           <ion-input formControlName = "name" type="text" value={{data.nome}}></ion-input>
@@ -24,7 +24,7 @@
           <ion-toggle formControlName = "status" checked={{data.situacao}}></ion-toggle>
           <!--<ion-input formControlName = "password" type="text"></ion-input>-->
       </ion-item>
-      <button ion-button type="submit">Salvar</button>
-    <button ion-button (click)="goback()">Voltar</button>
+      <button ion-button full type="submit">Salvar</button>
   </form>
+  <button ion-button full (click)="goback()">Voltar</button>
 </ion-content>

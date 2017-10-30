@@ -21,8 +21,15 @@
 <ion-content padding>
     <ion-list>
         <button ion-item *ngFor="let produto of produtos" (click)="itemSelected(produto)" detail-push>
-          {{produto.nome}}
-          <h3 item-end>R$ {{produto.valor}}</h3>
+          {{produto.produto_data.nome}}
+          <h3 item-end>R$ {{produto.produto_data.valor}}</h3>
         </button>
     </ion-list>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <button ion-button full (click)="novo_produto()" detail-push>
+        Novo Produto
+      </button>
+  </ion-toolbar>
+</ion-footer>
