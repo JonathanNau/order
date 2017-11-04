@@ -26,9 +26,13 @@ import { Produtos } from '../pages/produtos/produtos';
 import { DetalheProduto } from '../pages/detalhe-produto/detalhe-produto';
 import { Funcionarios } from '../pages/funcionarios/funcionarios';
 import { DetalhesFuncionario } from '../pages/detalhes-funcionario/detalhes-funcionario';
+import { CarrinhoCategoria } from '../pages/carrinho-categoria/carrinho-categoria';
+import { CarrinhoProduto } from '../pages/carrinho-produto/carrinho-produto';
+import { CarrinhoProdutoDetalhe } from '../pages/carrinho-produto-detalhe/carrinho-produto-detalhe';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
+import { Carrinho } from '../providers/carrinho';
 
 @NgModule({
   declarations: [
@@ -52,7 +56,10 @@ import { LoginProvider } from '../providers/loginprovider';
     Produtos,
     DetalheProduto,
     Funcionarios,
-    DetalhesFuncionario
+    DetalhesFuncionario,
+    CarrinhoCategoria,
+    CarrinhoProduto,
+    CarrinhoProdutoDetalhe
   ],
   imports: [
     BrowserModule,
@@ -83,14 +90,18 @@ import { LoginProvider } from '../providers/loginprovider';
     Produtos,
     DetalheProduto,
     Funcionarios,
-    DetalhesFuncionario
+    DetalhesFuncionario,
+    CarrinhoCategoria,
+    CarrinhoProduto,
+    CarrinhoProdutoDetalhe
   ],
   providers: [
     StatusBar,
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     Json,
-    LoginProvider
+    LoginProvider,
+    Carrinho
   ]
 })
 export class AppModule {}

@@ -14,15 +14,15 @@
 
 
 <ion-content padding>
-  <form [formGroup]="dados" (ngSubmit)="alterar(data, dados)">
+  <form [formGroup]="dados" (ngSubmit)="chama(data, dados)">
   
     <ion-item>
         <ion-label floating>Nome</ion-label>
         <ion-input formControlName = "nome" type="text"></ion-input>
     </ion-item>
     <ion-item>
-        <ion-label floating>Telefone</ion-label>
-        <ion-input formControlName = "telefone" type="text"></ion-input>
+      <ion-label floating>Email</ion-label>
+      <ion-input formControlName = "email" type="email"></ion-input>
     </ion-item>
     <ion-item>
         <ion-label floating>Senha</ion-label>
@@ -33,6 +33,6 @@
         <ion-toggle formControlName = "status"></ion-toggle>
     </ion-item>
     <button ion-button full type="submit">Salvar</button>
-    <button ion-button full (click)="goback()">Voltar</button>
   </form>
+  <button ion-button full (click)="goback()">Voltar</button>
 </ion-content>

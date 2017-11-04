@@ -1,8 +1,10 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { Json } from '../../providers/json'
+
+import { Produtos } from '../produtos/produtos';
 
 /**
  * Generated class for the DetalheProduto page.
@@ -20,7 +22,7 @@ export class DetalheProduto {
   a = 0;
   categorias: any;
   private dados : FormGroup;
-  constructor(public json: Json, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(private appCtrl: App, public json: Json, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
     this.json.getCategoriaData().subscribe(data => {
       this.categorias = [];
 
@@ -38,7 +40,7 @@ export class DetalheProduto {
     this.data = this.navParams.get('produto_data');
     if (this.data !== 1){
       this.dados = this.formBuilder.group({
-        categoria: [this.data.categoria.nome, Validators.required],
+        categoria: [this.data.categoria.id, Validators.required],
         nome: [this.data.nome, Validators.required],
         valor: [this.data.valor, Validators.required],
         status: [this.data.situacao, Validators.required],
@@ -46,19 +48,45 @@ export class DetalheProduto {
       this.a=1;
     } else {
       this.dados = this.formBuilder.group({
-        categoria: ['comida', Validators.required],
-        nome: ['Dog Atum', Validators.required],
-        valor: ['17,00', Validators.required],
+        categoria: ['', Validators.required],
+        nome: ['', Validators.required],
+        valor: ['', Validators.required],
         status: ['True', Validators.required],
       });
       this.a=2;
     }
   }
 
+  chama(data, dados){
+    if (this.a == 1){
+      this.alterar(data, dados)
+    } else {
+      this.novo(dados)
+    }
+  }
+
+  novo(dados){
+    console.log('Novo Produto');
+    let dat = {
+      'categoria': dados.value.categoria,
+      'nome': dados.value.nome,
+      'valor': dados.value.valor,
+      'situacao': dados.value.status
+    };
+    console.log(dat);
+    this.json.novoProduto(dat);
+    this.appCtrl.getRootNav().setRoot(Produtos);
+  }
+
   alterar(data, dados){
+    data.categoria = dados.value.categoria;
+    data.categoria1 = dados.value.categoria;
     data.nome = dados.value.nome;
+    data.valor = dados.value.valor;
     data.situacao = dados.value.status;
-    //this.json.alterarCategoria(data);
+    console.log(data);
+    this.json.alterarProduto(data);
+    this.appCtrl.getRootNav().setRoot(Produtos);
   }
 
   goback() {

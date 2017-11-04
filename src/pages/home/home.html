@@ -14,10 +14,15 @@
 
 <ion-content padding class="home">
   <ion-list>
-    <button ion-item *ngFor="let pedido of pedidos" (click)="itemSelected(pedido)" detail-push>
-      {{pedido.loja}} - {{pedido.status}}
-      <h3 item-end>{{pedido.valor}}</h3>
-    </button>
+    <ion-item-sliding *ngFor="let pedido of pedidos" (click)="itemSelected(pedido)" #item>
+      <ion-item  detail-push>
+        {{pedido.loja}} - {{pedido.status}}
+        <h3 item-end>{{pedido.valor}}</h3>
+      </ion-item>
+      <ion-item-options side="right">
+          <button ion-button expandable (click)="delete(item)">Delete</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
   <!--
   The world is your oyster.

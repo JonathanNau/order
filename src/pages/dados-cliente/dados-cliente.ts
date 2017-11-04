@@ -10,14 +10,27 @@ import { Json } from '../../providers/json'
   templateUrl: 'dados-cliente.html',
 })
 export class DadosCliente {
-  data_cliente: any;
+  data: any;
+  a = 0;
   private dados : FormGroup;
   constructor(private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams, private json: Json) {
-    this.json.getCategoriaData().subscribe(data => {
-      this.data_cliente = [];
+    this.data = this.navParams.get('funcionarios_data');
 
-      console.log(this.data_cliente);
-    });
+    if (this.data !== 1){
+      this.dados = this.formBuilder.group({
+        name: [this.data.nome, Validators.required],
+        status: [this.data.situacao, Validators.required],
+      });
+      this.a=1;
+    } else {
+      this.dados = this.formBuilder.group({
+        name: ['', Validators.required],
+        email: ['', Validators.required],
+        senha: ['', Validators.required],
+      });
+      this.a=2;
+    }
+
     this.dados = this.formBuilder.group({
       name: ['Jonathan Nau', Validators.required],
       email: ['jonathan_nau@live.com', Validators.required],

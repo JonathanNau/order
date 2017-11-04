@@ -1,13 +1,12 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
-import { TabsPage } from '../tabs-page/tabs-page';
 
-/**
- * Generated class for the Recebimento page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+import { CarrinhoCategoria } from '../carrinho-categoria/carrinho-categoria';
+
+import { Json } from '../../providers/json'
+import { Carrinho } from '../../providers/carrinho'
+
+
 @IonicPage()
 @Component({
   selector: 'page-recebimento',
@@ -15,22 +14,37 @@ import { TabsPage } from '../tabs-page/tabs-page';
 })
 export class Recebimento {
   public recebimentos;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+  constructor(public json: Json, public carrinho: Carrinho,public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
+    console.log(this.carrinho.loja);
+    this.json.getRecebimentos().subscribe(data => {
+      this.recebimentos = [];
+      console.log(data);
+      for(var i = 0; i < data.length; i++) {
+
+        this.recebimentos.push(
+          {
+            recebimento_data: data[i]
+          }
+        );
+ 
+      }
+    });
+/*
     this.recebimentos = [
       { nome: "Mesa", icon: "home" },
       { nome: "Balcão", icon: "home" },
       { nome: "Carro", icon: "home" }
-    ];
+    ];*/
   }
 
   itemSelected(recebimento){
     //Salva meio de recebimento e continua no pedido
-    if (recebimento.nome == 'Mesa'){
+    if (recebimento.recebimento_data.nome == 'Mesa'){
       this.criarAlerta('Mesa', 'Qual sua mesa?', 'Digite o número da mesa');
-    } else if (recebimento.nome == 'Carro') {
+    } else if (recebimento.recebimento_data.nome == 'Carro') {
       this.criarAlerta('Carro', 'Qual é seu carro?', 'Digite o número da placa.');
     } else {
-      this.navCtrl.push(TabsPage);
+      this.navCtrl.push(CarrinhoCategoria);
     }
     
   }
@@ -57,7 +71,7 @@ export class Recebimento {
           text: 'Confirmar',
           handler: data => {
             if (data.valor) {
-              this.navCtrl.push(TabsPage);
+              this.navCtrl.push(CarrinhoCategoria);
             } else {
               console.log('Problema para inserir mesa ou carro');
               return false;

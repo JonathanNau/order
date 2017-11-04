@@ -17,13 +17,27 @@ export class LoginProvider {
   codigo;
   id;
   loja; //salvar código da loja quando usuário for do tipo loja
+  nome_loja;
+  telefone_loja;
+  latitude_loja;
+  longitude_loja;
+  situação_loja;
+  email;
+  senha;
   constructor(public http: Http, public menu: MenuController) {
-    console.log('Hello Login Provider');
+    console.log('Serviço Login Provider criado!');
     this.isLoggedin = false;
     this.AuthToken = null;
     this.codigo = 0;
     this.id = 0;
     this.loja = 0;
+    this.nome_loja='';
+    this.telefone_loja=0;
+    this.latitude_loja=0;
+    this.longitude_loja=0;
+    this.situação_loja=false;
+    this.email='';
+    this.senha='';
   }
   storeUserCredentials(token) {
     window.localStorage.setItem('user_order_token', token);
@@ -90,7 +104,15 @@ loadDadosLoja(data){
         .subscribe(data => {
             if (data){
                 console.log('Código da loja salvo, código = ' + data.loja.id);
-                this.loja = data.loja.id
+                this.loja = data.loja.id;
+                this.nome_loja=data.loja.nome;
+                this.telefone_loja=data.loja.telefone;
+                this.latitude_loja=data.loja.latitude;
+                this.longitude_loja=data.loja.longitude;
+                this.situação_loja=data.loja.situacao;
+                this.email=data.usuario.email;
+                this.senha=data.usuario.password;
+                
             }
         }, error => {
             console.log(error);
@@ -98,6 +120,7 @@ loadDadosLoja(data){
         });
     })
 }
+
 authenticate(user) {
     let creds = {
       username: user.value.name,
@@ -110,10 +133,8 @@ authenticate(user) {
         this.http.post('http://localhost:8000/api/auth/token/', JSON.stringify(creds), {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
-            console.log(data)
-            console.log(data.token)
             if(data.token){
-                console.log('consegui')
+                console.log('TOKEN obtido!')
                 this.storeUserCredentials(data.token);
                 this.loadDadosUser(creds,data).then(data => {
                     if(data){
@@ -130,7 +151,7 @@ authenticate(user) {
                 
             }
             else{
-                console.log('deu ruim')
+                console.log('Problema ao efetuar login')
                 resolve(false);
             }
         }, error => {
@@ -165,9 +186,9 @@ adduser(user) {
 
 getinfo() {
     return new Promise(resolve => {
+        console.log('Verificar validade do token');
         var headers = new Headers();
         this.loadUserCredentials();
-        console.log(this.AuthToken);
         let creds = {
             token: this.AuthToken
         }

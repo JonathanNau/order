@@ -14,11 +14,11 @@
 
 
 <ion-content padding>
-  <form [formGroup]="dados" (ngSubmit)="alterar(data, dados)">
+  <form [formGroup]="dados" (ngSubmit)="chama(data, dados)">
     <ion-item>
         <ion-label floating>Categoria</ion-label>
         <ion-select formControlName = "categoria">
-            <ion-option *ngFor="let categoria of categorias" value={{categoria.categoria_data.nome}}>{{categoria.categoria_data.nome}}</ion-option>
+            <ion-option *ngFor="let categoria of categorias" value={{categoria.categoria_data.id}}>{{categoria.categoria_data.nome}}</ion-option>
         </ion-select>
     </ion-item>
 
