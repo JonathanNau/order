@@ -7,7 +7,12 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>carrinho-produto</ion-title>
+    <ion-title>Produtos</ion-title>
+    <ion-buttons right>
+        <button ion-button icon-only (click)="checkout()">
+            <ion-icon name="cart"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
@@ -15,9 +20,14 @@
 
 <ion-content padding>
   <ion-list>
-    <button ion-item *ngFor="let produto of produtos" (click)="itemSelected(produto)" detail-push>
-      {{produto.produto_data.nome}}
-      <h3 item-end>R$ {{produto.produto_data.valor}}</h3>
-    </button>
+    <ion-item-sliding *ngFor="let produto of produtos" #item>
+      <ion-item (click)="itemSelected(produto)" detail-push>
+          <h3 item-start>{{produto.produto_data.nome}}</h3>
+        <h3 item-end>R$ {{produto.produto_data.valor}}</h3>
+      </ion-item>
+      <ion-item-options side="right">
+          <button ion-button expandable (click)="add_carrinho(produto, 1)">Adicionar</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>

@@ -1,7 +1,12 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { ToastController, IonicPage, NavController, NavParams } from 'ionic-angular';
+
+import { Checkout } from '../checkout/checkout';
 
 import { Json } from '../../providers/json'
+import { Carrinho } from '../../providers/carrinho'
+
+import { CarrinhoProdutoDetalhe } from '../carrinho-produto-detalhe/carrinho-produto-detalhe';
 
 @IonicPage()
 @Component({
@@ -11,7 +16,7 @@ import { Json } from '../../providers/json'
 export class CarrinhoProduto {
   public produtos;
   data;
-  constructor(public navCtrl: NavController, public navParams: NavParams, private json: Json) {
+  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private json: Json, private carrinho: Carrinho) {
     this.data = this.navParams.get('categoria_data');
     this.json.getProdutosClienteData(this.data.id).subscribe(data => {
       this.produtos = [];
@@ -30,6 +35,31 @@ export class CarrinhoProduto {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad CarrinhoProduto');
+  }
+
+  itemSelected(produto){
+    this.navCtrl.push(CarrinhoProdutoDetalhe, produto);
+  }
+
+  checkout(){
+    this.navCtrl.push(Checkout)
+  }
+
+  add_carrinho(produto, quantidade){
+    this.carrinho.adicionar_item(produto.produto_data, quantidade)
+
+    let toast = this.toastCtrl.create({
+      message: 'Produto adicionado ao carrinho!',
+      duration: 3000,
+      position: 'middle'
+    });
+  
+    toast.onDidDismiss(() => {
+      console.log('Dismissed toast');
+    });
+  
+    toast.present();
+
   }
 
 }

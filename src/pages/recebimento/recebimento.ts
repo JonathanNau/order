@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
+import { ViewChild, Component } from '@angular/core';
+import { Navbar, IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 
 import { CarrinhoCategoria } from '../carrinho-categoria/carrinho-categoria';
 
@@ -13,6 +13,7 @@ import { Carrinho } from '../../providers/carrinho'
   templateUrl: 'recebimento.html',
 })
 export class Recebimento {
+  @ViewChild(Navbar) navBar: Navbar;
   public recebimentos;
   constructor(public json: Json, public carrinho: Carrinho,public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController) {
     console.log(this.carrinho.loja);
@@ -85,6 +86,31 @@ export class Recebimento {
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad Recebimento');
+    this.navBar.backButtonClick = (e:UIEvent)=>{
+      // todo something
+      console.log('executar o bagulho louco de voltar');
+      let alert = this.alertCtrl.create({
+        title: 'Sair do pedido',
+        message: 'Deseja sair do Pedido?',
+        buttons: [
+          {
+            text: 'Não',
+            role: 'cancel',
+            handler: () => {
+              console.log('Cancel clicked');
+            }
+          },
+          {
+            text: 'Sim',
+            handler: () => {
+              //Destruir tudo dos produtos
+              this.navCtrl.pop();
+            }
+          }
+        ]
+      });
+      alert.present();
+     }
   }
 
 }

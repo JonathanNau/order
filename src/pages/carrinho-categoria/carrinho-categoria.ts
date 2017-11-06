@@ -4,6 +4,7 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Json } from '../../providers/json'
 
 import { CarrinhoProduto } from '../carrinho-produto/carrinho-produto';
+import { Checkout } from '../checkout/checkout';
 
 /**
  * Generated class for the CarrinhoCategoria page.
@@ -41,6 +42,9 @@ export class CarrinhoCategoria {
 
   itemSelected(categoria){
     this.navCtrl.push(CarrinhoProduto, categoria);
+  }
+  checkout(){
+    this.navCtrl.push(Checkout)
   }
 
 }

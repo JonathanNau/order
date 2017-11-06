@@ -14,5 +14,22 @@
 
 
 <ion-content padding>
-
+  <ion-list>
+    <ion-item>
+      <h2>Quantidade:</h2>
+      <button ion-button medium (click)="diminui()">-</button>
+      <button ion-button medium disabled="true" outline>{{valor}}</button>
+      <button ion-button medium (click)="soma()">+</button>
+    </ion-item>
+    <ion-item>
+        <h2>Valor total: {{valor_total}}</h2>
+      </ion-item>
+  </ion-list>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <button ion-button full (click)="add_carrinho()" detail-push>
+          Adicionar ao carrinho
+        </button>
+    </ion-toolbar>
+  </ion-footer>

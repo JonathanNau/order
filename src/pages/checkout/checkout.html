@@ -15,10 +15,15 @@
 
 <ion-content padding>
   <ion-list> 
-    <button ion-item *ngFor="let produto of produtos" (click)="itemSelected(produto)" detail-push>
-      {{produto.nome}}
-      <h3 item-end>Quantidade: {{produto.quantidade}}</h3>
-    </button>
+    <ion-item-sliding *ngFor="let produto of produtos" #item>
+      <ion-item (click)="itemSelected(produto)" detail-push>
+        {{produto.produto.nome}}
+        <h3 item-end>{{produto.quantidade}} x R${{produto.valor}} = R${{produto.valor_total_item}}</h3>
+      </ion-item>
+      <ion-item-options side="right">
+          <button ion-button expandable (click)="remove_carrinho(produto)">Remover</button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
 <ion-footer>
