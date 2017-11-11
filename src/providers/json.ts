@@ -47,6 +47,14 @@ export class Json {
     return this.http.get(this.base_url+'/produto-categoria/'+id_categoria+'/', {headers: headers})
     .map(res => res.json())
   }
+
+  getPedidosLoja(){
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return this.http.get(this.base_url+'/pedido-loja/'+this.lp.loja+'/', {headers: headers})
+    .map(res => res.json())
+  }
+
   getCategoriaData(){
       var headers = new Headers();
       headers.append('Authorization','JWT ' +this.lp.getCredentials());
@@ -199,6 +207,84 @@ export class Json {
       }, error => {
       console.log(error);
     });
+  }
+
+  recuperaData(){
+    var displayDate = new Date();
+    var day = displayDate.getDate();
+    var monthIndex = displayDate.getMonth();
+    var year = displayDate.getFullYear();
+    return year+'-'+(monthIndex+1)+'-'+day;
+  }
+  novoPedido(){
+    console.log('Criar Novo Pedido');
+    let data = {
+    'data': this.recuperaData(),
+    'recebimento_valor': this.carrinho.valor_recebimento,
+    'situacao': 'Pendente',
+    'usuario1': this.lp.id,
+    'loja1': this.carrinho.loja.loja_data.id,
+    'recebimento1': this.carrinho.tipo_recebimento.id
+    };
+    //data.codigo = 2;
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+
+    return this.http.post(this.base_url+'/pedido/', data, {headers: headers})
+    .map(res => res.json())
+    .subscribe(data1 => {
+      console.log('Pedido Criado com sucesso!');
+      console.log(data1);
+
+      console.log('Iniciar salvamento dos produtos!');
+      for (let i of this.carrinho.itens){
+        let env = {
+          'pedido1': data1.id,
+          'produto1': i.produto.id,
+          'valor': i.valor,
+          'quantidade': i.quantidade
+        }
+  
+        this.http.post(this.base_url+'/itempedido/', env, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data2 => {
+          console.log(data2['_body']);
+          }, error => {
+            console.log('Problema ao inserir os produtos');
+            console.log(error);
+        });
+      }
+    }, error => {
+      console.log('Problema ao criar um novo pedido');
+      console.log(error);
+    });
+
+
+  }
+
+  testeProduto(){
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+
+    console.log('Iniciar salvamento dos produtos!');
+    for (let i of this.carrinho.itens){
+      let env = {
+        'pedido1': 2,
+        'produto1': i.produto.id,
+        'valor': i.valor,
+        'quantidade': i.quantidade
+      }
+
+      this.http.post(this.base_url+'/itempedido/', env, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data2 => {
+        console.log(data2['_body']);
+        }, error => {
+        console.log(error);
+      });
+    }
   }
 
   alterarProduto(data){

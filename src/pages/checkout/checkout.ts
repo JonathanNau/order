@@ -6,6 +6,7 @@ import { Login } from '../login/login';
 import { CarrinhoProdutoDetalhe } from '../carrinho-produto-detalhe/carrinho-produto-detalhe';
 
 import { Carrinho } from '../../providers/carrinho';
+import { Json } from '../../providers/json';
 
 @IonicPage()
 @Component({
@@ -16,7 +17,7 @@ export class Checkout {
   public produtos;
 
   public valor_total;
-  constructor(private carrinho: Carrinho, public appCtrl: App, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public viewCtrl: ViewController) {
+  constructor(private json: Json, private carrinho: Carrinho, public appCtrl: App, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public viewCtrl: ViewController) {
     this.produtos = carrinho.itens;
     this.valor_total = 0.0;
     for (let item of this.produtos){
@@ -49,7 +50,7 @@ export class Checkout {
         {
           text: 'Sim, estou satisfeito',
           handler: () => {
-            //Finaliza o pedidos
+            this.json.novoPedido();
           }
         }
       ]

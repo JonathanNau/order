@@ -7,19 +7,25 @@
 <ion-header>
 
   <ion-navbar>
-    <ion-title>carrinho-produto-detalhe</ion-title>
+    <ion-title>Detalhe do Produto</ion-title>
   </ion-navbar>
 
 </ion-header>
 
 
-<ion-content padding>
+<ion-content class="card-background-page">
+  <ion-card>
+      <img height="200" src={{imagem}}/>
+    </ion-card>
   <ion-list>
     <ion-item>
+      <h2>Descrição: {{data.descricao}}</h2>
+    </ion-item>
+    <ion-item>
       <h2>Quantidade:</h2>
-      <button ion-button medium (click)="diminui()">-</button>
-      <button ion-button medium disabled="true" outline>{{valor}}</button>
-      <button ion-button medium (click)="soma()">+</button>
+      <button ion-button medium item-end (click)="diminui()">-</button>
+      <button ion-button medium item-end disabled="true" outline>{{valor}}</button>
+      <button ion-button medium item-end (click)="soma()">+</button>
     </ion-item>
     <ion-item>
         <h2>Valor total: {{valor_total}}</h2>

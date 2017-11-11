@@ -6,9 +6,12 @@ import 'rxjs/add/operator/map';
 @Injectable()
 export class Carrinho {
   loja;
+  valor_recebimento;
+  tipo_recebimento;
   itens;
   constructor(public http: Http) {
     console.log('Hello Carrinho Provider');
+    this.valor_recebimento = 0;
     this.itens = [];
   }
 

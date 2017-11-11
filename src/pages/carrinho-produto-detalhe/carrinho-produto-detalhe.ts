@@ -12,9 +12,12 @@ import { Carrinho } from '../../providers/carrinho'
 export class CarrinhoProdutoDetalhe {
   data;
   valor = 1;
+  imagem = '';
   valor_total;
   constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private carrinho: Carrinho) {
     this.data = this.navParams.get('produto_data');
+    this.imagem = 'http://localhost:8000'+this.data.foto
+    console.log(this.data);
     this.valor_total = this.data.valor;
   }
 

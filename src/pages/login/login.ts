@@ -55,7 +55,12 @@ export class Login {
   verifica_login() {
     this.loginprovider.getinfo().then(data => {
       if(data){
-        this.cria_menu();
+        this.loginprovider.loadDadosLoja(data).then(data1 => {
+          if(data1){
+            this.cria_menu();
+          }
+        });
+        
         console.log('Verificado o login com sucesso pelo metodo GetInfo');
       } else {
         console.log('Problema com verificação do login pelo metodo GetInfo. Exigido login/senha');
@@ -72,7 +77,16 @@ export class Login {
     this.loginprovider.authenticate(user).then(data => {
       if(data) {
         console.log('Realizado login com sucesso');
-        this.cria_menu();
+        if (this.loginprovider.codigo == 1){
+          this.loginprovider.loadDadosLoja(data).then(data1 => {
+            this.cria_menu();
+          });
+        } else {
+          this.cria_menu();
+        }
+
+        
+        
       } else {
         console.log('Problema ao realizar login');
         var alert = this.alertCtrl.create({

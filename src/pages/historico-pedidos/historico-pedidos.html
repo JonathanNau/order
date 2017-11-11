@@ -19,10 +19,11 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <button ion-item *ngFor="let pedido of pedidos" (click)="itemSelected(pedido)" detail-push>
-      {{pedido.loja}} - {{pedido.data}}
-      <h3 item-end>{{pedido.valor}}</h3>
-    </button>
+  <ion-list *ngFor="let pedido of pedidos" (click)="itemSelected(pedido)" #item>
+    <ion-item  detail-push>
+      Cliente: {{pedido.pedido_data.usuario.username}}
+      <h3 item-end>{{pedido.pedido_data.recebimento.nome}}: {{pedido.pedido_data.recebimento_valor}}</h3>
+      <p>Data: {{pedido.pedido_data.data}}</p>
+    </ion-item>
   </ion-list>
 </ion-content>

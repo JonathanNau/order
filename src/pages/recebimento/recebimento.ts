@@ -47,6 +47,7 @@ export class Recebimento {
     } else {
       this.navCtrl.push(CarrinhoCategoria);
     }
+    this.carrinho.tipo_recebimento = recebimento.recebimento_data;
     
   }
 
@@ -72,6 +73,7 @@ export class Recebimento {
           text: 'Confirmar',
           handler: data => {
             if (data.valor) {
+              this.carrinho.valor_recebimento = data.valor;
               this.navCtrl.push(CarrinhoCategoria);
             } else {
               console.log('Problema para inserir mesa ou carro');

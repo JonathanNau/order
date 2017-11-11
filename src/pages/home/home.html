@@ -13,17 +13,15 @@
 </ion-header>
 
 <ion-content padding class="home">
-  <ion-list>
-    <ion-item-sliding *ngFor="let pedido of pedidos" (click)="itemSelected(pedido)" #item>
-      <ion-item  detail-push>
-        {{pedido.loja}} - {{pedido.status}}
-        <h3 item-end>{{pedido.valor}}</h3>
-      </ion-item>
-      <ion-item-options side="right">
-          <button ion-button expandable (click)="delete(item)">Delete</button>
-      </ion-item-options>
-    </ion-item-sliding>
+  <ion-list *ngFor="let pedido of pedidos" (click)="itemSelected(pedido)" #item>
+    <ion-item  detail-push>
+      Cliente: {{pedido.pedido_data.usuario.username}}
+      <h3 item-end>{{pedido.pedido_data.recebimento.nome}}: {{pedido.pedido_data.recebimento_valor}}</h3>
+      <p>Data: {{pedido.pedido_data.data}}</p>
+    </ion-item>
   </ion-list>
+  <button ion-button color="primary" (click)="accessGallery()">Open Gallery</button>
+  <img [src]="base64Image" *ngIf="base64Image" />
   <!--
   The world is your oyster.
   <p>

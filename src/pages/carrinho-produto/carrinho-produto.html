@@ -19,11 +19,12 @@
 
 
 <ion-content padding>
-  <ion-list>
-    <ion-item-sliding *ngFor="let produto of produtos" #item>
+  <ion-list *ngFor="let produto of produtos">
+    <ion-item-sliding  #item>
       <ion-item (click)="itemSelected(produto)" detail-push>
-          <h3 item-start>{{produto.produto_data.nome}}</h3>
+        {{produto.produto_data.nome}}
         <h3 item-end>R$ {{produto.produto_data.valor}}</h3>
+        <p>{{produto.produto_data.descricao}}</p>
       </ion-item>
       <ion-item-options side="right">
           <button ion-button expandable (click)="add_carrinho(produto, 1)">Adicionar</button>

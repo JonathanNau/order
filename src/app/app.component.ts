@@ -50,6 +50,7 @@ export class MyApp {
       { title: 'Funcionarios', component: Funcionarios},
       { title: 'Categoria', component: Categoria },
       { title: 'Produtos', component: Produtos },
+      { title: 'Pedidos', component: HistoricoPedidos },
       { title: 'Catalogo', component: TabsPage },
       { title: 'Logout', component: null },
     ];
@@ -58,6 +59,7 @@ export class MyApp {
     this.pagesFuncionario = [
       { title: 'Home', component: HomePage },
       { title: 'Dados', component: DadosCliente},
+      { title: 'Pedidos', component: HistoricoPedidos },
       { title: 'Logout', component: null },
     ];
 

@@ -112,7 +112,7 @@ loadDadosLoja(data){
                 this.situação_loja=data.loja.situacao;
                 this.email=data.usuario.email;
                 this.senha=data.usuario.password;
-                
+                resolve(true);
             }
         }, error => {
             console.log(error);
@@ -139,9 +139,6 @@ authenticate(user) {
                 this.loadDadosUser(creds,data).then(data => {
                     if(data){
                         console.log(this.codigo);
-                        if (this.codigo == 1){
-                            this.loadDadosLoja(data);
-                        }
                         resolve(true);
                     } else {
                         console.log("Problema ao ler dados do Usuário");
