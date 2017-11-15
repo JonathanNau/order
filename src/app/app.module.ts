@@ -29,6 +29,10 @@ import { DetalhesFuncionario } from '../pages/detalhes-funcionario/detalhes-func
 import { CarrinhoCategoria } from '../pages/carrinho-categoria/carrinho-categoria';
 import { CarrinhoProduto } from '../pages/carrinho-produto/carrinho-produto';
 import { CarrinhoProdutoDetalhe } from '../pages/carrinho-produto-detalhe/carrinho-produto-detalhe';
+import { DetalhePedidoAberto } from '../pages/detalhe-pedido-aberto/detalhe-pedido-aberto';
+import { DetalheItemPedidoAberto } from '../pages/detalhe-item-pedido-aberto/detalhe-item-pedido-aberto';
+import { DetalhePedidoFechado } from '../pages/detalhe-pedido-fechado/detalhe-pedido-fechado';
+import { DetalheItemPedidoFechado } from '../pages/detalhe-item-pedido-fechado/detalhe-item-pedido-fechado';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -59,7 +63,11 @@ import { Carrinho } from '../providers/carrinho';
     DetalhesFuncionario,
     CarrinhoCategoria,
     CarrinhoProduto,
-    CarrinhoProdutoDetalhe
+    CarrinhoProdutoDetalhe,
+    DetalhePedidoAberto,
+    DetalheItemPedidoAberto,
+    DetalhePedidoFechado,
+    DetalheItemPedidoFechado
   ],
   imports: [
     BrowserModule,
@@ -93,7 +101,11 @@ import { Carrinho } from '../providers/carrinho';
     DetalhesFuncionario,
     CarrinhoCategoria,
     CarrinhoProduto,
-    CarrinhoProdutoDetalhe
+    CarrinhoProdutoDetalhe,
+    DetalhePedidoAberto,
+    DetalheItemPedidoAberto,
+    DetalhePedidoFechado,
+    DetalheItemPedidoFechado
   ],
   providers: [
     StatusBar,

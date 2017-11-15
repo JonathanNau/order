@@ -55,6 +55,13 @@ export class Json {
     .map(res => res.json())
   }
 
+  getItensPedido(id_pedido){
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return this.http.get(this.base_url+'/itempedido/'+id_pedido+'/', {headers: headers})
+    .map(res => res.json())
+  }
+
   getCategoriaData(){
       var headers = new Headers();
       headers.append('Authorization','JWT ' +this.lp.getCredentials());
@@ -118,6 +125,51 @@ export class Json {
       console.log(data['_body']);
       }, error => {
       console.log(error);
+    });
+  }
+
+  alterarStatusPedido(data1){
+    console.log('chamei json alterar status do pedido');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return new Promise(resolve => {
+      this.http.put(this.base_url+'/pedido/'+data1.id+'/', data1, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        this.data = data;
+        resolve(this.data);
+      });
+    });
+  }
+
+  alterarQuantidadeProduto(data1){
+    console.log('chamei json alterar quantidade do produto');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return new Promise(resolve => {
+      this.http.put(this.base_url+'/itempedido/'+data1.id+'/', data1, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        this.data = data;
+        resolve(this.data);
+      });
+    });
+  }
+
+  removerProdutoPedido(data1){
+    console.log('chamei json remover produto');
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return new Promise(resolve => {
+      this.http.delete(this.base_url+'/itempedido/'+data1.id+'/', {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        this.data = data;
+        resolve(this.data);
+      });
     });
   }
 

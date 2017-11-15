@@ -5,6 +5,7 @@ import { NavController, NavParams } from 'ionic-angular';
 import { Geo } from '../geo/geo';
 import { Login } from '../login/login';
 import { DetalhePedido } from '../detalhe-pedido/detalhe-pedido';
+import { DetalhePedidoAberto } from '../detalhe-pedido-aberto/detalhe-pedido-aberto';
 
 import { Json } from '../../providers/json'
 
@@ -47,8 +48,8 @@ export class HomePage {
        console.log(err);
      });
    }
-  itemSelected(comida){
-    this.navCtrl.push(DetalhePedido, 'oi');
+  itemSelected(pedido){
+    this.navCtrl.push(DetalhePedidoAberto, pedido);
   }
   
 

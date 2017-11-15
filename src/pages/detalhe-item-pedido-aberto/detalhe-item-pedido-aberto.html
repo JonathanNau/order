@@ -1,0 +1,44 @@
+<!--
+  Generated template for the DetalheItemPedidoAberto page.
+
+  See http://ionicframework.com/docs/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>Detalhe do Produto</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content class="card-background-page">
+  <ion-card>
+      <img height="200" src={{imagem}}/>
+    </ion-card>
+  <ion-list>
+    <ion-item>
+      <h2>Descrição: {{produto.produto.descricao}}</h2>
+    </ion-item>
+    <ion-item>
+      <h2>Quantidade:</h2>
+      <button ion-button medium item-end (click)="diminui()">-</button>
+      <button ion-button medium item-end disabled="true" outline>{{quantidade}}</button>
+      <button ion-button medium item-end (click)="soma()">+</button>
+    </ion-item>
+    <ion-item>
+        <h2>Valor total</h2>
+        <h2 item-end>{{quantidade}} x {{produto.valor1}} = {{valor_total}}</h2>
+    </ion-item>
+  </ion-list>
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+      <button ion-button full color="danger" (click)="remover_produto()" detail-push>
+          Remover produto
+        </button>
+      <button ion-button full [disabled]="!isenabled" (click)="atualizar_produto()" detail-push>
+        Atualizar produto
+      </button>
+  </ion-toolbar>
+</ion-footer>

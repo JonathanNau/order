@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 
-import { DetalhePedido } from '../detalhe-pedido/detalhe-pedido';
+//import { DetalhePedido } from '../detalhe-pedido/detalhe-pedido';
+import { DetalhePedidoFechado } from '../detalhe-pedido-fechado/detalhe-pedido-fechado';
 
 import { Json } from '../../providers/json'
 
@@ -34,8 +35,8 @@ export class HistoricoPedidos {
       { id: '1', loja: "Italiano", data: '17/07/2017', valor: 'R$ 20,00', icon: "home" }
     ];*/
   }
-  itemSelected(comida){
-    this.navCtrl.push(DetalhePedido, 'oi');
+  itemSelected(pedido){
+    this.navCtrl.push(DetalhePedidoFechado, pedido);
   }
 
   ionViewDidLoad() {

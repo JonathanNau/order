@@ -77,7 +77,8 @@ export class Login {
     this.loginprovider.authenticate(user).then(data => {
       if(data) {
         console.log('Realizado login com sucesso');
-        if (this.loginprovider.codigo == 1){
+        if (this.loginprovider.codigo == 1 || this.loginprovider.codigo == 2){
+          console.log('Sou loja ou funcionario');
           this.loginprovider.loadDadosLoja(data).then(data1 => {
             this.cria_menu();
           });
