@@ -1,0 +1,20 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only menuToggle>
+        <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title>Recebimentos</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+    <ion-list>
+        <ion-item *ngFor="let recebimento of recebimentos">
+            <ion-label>{{recebimento.recebimento_data.nome}}</ion-label>
+            <ion-toggle (ionChange)="updateItem(recebimento)" checked={{recebimento.recebimento_data.situacao}}></ion-toggle>
+          </ion-item>
+      </ion-list>
+</ion-content>

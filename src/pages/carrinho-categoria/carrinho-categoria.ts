@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Json } from '../../providers/json'
+import { Carrinho } from '../../providers/carrinho'
 
 import { CarrinhoProduto } from '../carrinho-produto/carrinho-produto';
 import { Checkout } from '../checkout/checkout';
@@ -19,7 +20,9 @@ import { Checkout } from '../checkout/checkout';
 })
 export class CarrinhoCategoria {
   categorias: any;
-  constructor(public navCtrl: NavController, public navParams: NavParams, public json: Json) {
+  quantidade_produtos = 0;
+  constructor(public events: Events, public navCtrl: NavController, public navParams: NavParams, public json: Json, private carrinho: Carrinho) {
+    this.quantidade_produtos = this.carrinho.itens.length;
     this.json.getCategoriaClientesData().subscribe(data => {
       this.categorias = [];
 
@@ -33,6 +36,10 @@ export class CarrinhoCategoria {
         }
       }
       console.log(this.categorias);
+    });
+    events.subscribe('adicionado', () => {
+      // user and time are the same arguments passed in `events.publish(user, time)`
+      this.quantidade_produtos = this.carrinho.itens.length;
     });
   }
 

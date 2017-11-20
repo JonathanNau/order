@@ -12,6 +12,7 @@ import { MenuController } from 'ionic-angular';
 */
 @Injectable()
 export class LoginProvider {
+    base_url = 'http://192.168.0.149:8000/api';
   isLoggedin: boolean;
   AuthToken;
   codigo;
@@ -79,7 +80,7 @@ loadDadosUser(creds, data){
     var headers = new Headers();
     headers.append('Authorization','JWT ' +data.token);
     return new Promise(resolve => {
-        this.http.get('http://localhost:8000/api/usuarios/', {headers: headers})
+        this.http.get(this.base_url+'/usuarios/', {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
             for(var i = 0; i < data.length; i++) {
@@ -99,7 +100,7 @@ loadDadosLoja(data){
     var headers = new Headers();
     headers.append('Authorization','JWT ' +this.AuthToken);
     return new Promise(resolve => {
-        this.http.get('http://localhost:8000/api/lojausuario/'+this.id+'/', {headers: headers})
+        this.http.get(this.base_url+'/lojausuario/'+this.id+'/', {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
             if (data){
@@ -130,7 +131,7 @@ authenticate(user) {
     headers.append('Content-Type', 'application/json' );
     
     return new Promise(resolve => {
-        this.http.post('http://localhost:8000/api/auth/token/', JSON.stringify(creds), {headers: headers})
+        this.http.post(this.base_url+'/auth/token/', JSON.stringify(creds), {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
             if(data.token){
@@ -163,13 +164,14 @@ adduser(user) {
         username: user.name,
         password: user.password,
         email: user.email,
+        codigo: user.codigo,
         is_active: true
     }
     var headers = new Headers();
     headers.append('Content-Type', 'application/json' );
     
     return new Promise(resolve => {
-        this.http.post('http://localhost:8000/api/usuarios/add/', JSON.stringify(creds), {headers: headers})
+        this.http.post(this.base_url+'/usuarios/add/', JSON.stringify(creds), {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
             console.log(data['_body']);
@@ -191,7 +193,7 @@ getinfo() {
         }
         headers.append('Content-Type', 'application/json' );
         //headers.append('Authorization', 'Bearer ' +this.AuthToken);
-        this.http.post('http://localhost:8000/api/api-token-verify/', JSON.stringify(creds), {headers: headers})
+        this.http.post(this.base_url+'/api-token-verify/', JSON.stringify(creds), {headers: headers})
         .map(res => res.json())
         .subscribe(data => {
             console.log(data['_body']);

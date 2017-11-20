@@ -14,9 +14,12 @@ export class Categoria {
   constructor(public navCtrl: NavController, public navParams: NavParams, public json: Json) {
     this.json.getCategoriaData().subscribe(data => {
       this.categorias = [];
-
       for(var i = 0; i < data.length; i++) {
-                  
+        if (data[i].situacao == true){
+          data[i].color = "secondary"
+        } else {
+          data[i].color = "danger"
+        }                  
         this.categorias.push(
           {
             categoria_data: data[i]

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, ToastController, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Checkout } from '../checkout/checkout';
 
@@ -16,7 +16,9 @@ import { CarrinhoProdutoDetalhe } from '../carrinho-produto-detalhe/carrinho-pro
 export class CarrinhoProduto {
   public produtos;
   data;
-  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private json: Json, private carrinho: Carrinho) {
+  quantidade_produtos = 0;
+  constructor(public events: Events, private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private json: Json, private carrinho: Carrinho) {
+    this.quantidade_produtos = carrinho.itens.length;
     this.data = this.navParams.get('categoria_data');
     this.json.getProdutosClienteData(this.data.id).subscribe(data => {
       this.produtos = [];
@@ -30,6 +32,10 @@ export class CarrinhoProduto {
         );
       }
       console.log(this.produtos);
+    });
+    events.subscribe('adicionado', () => {
+      // user and time are the same arguments passed in `events.publish(user, time)`
+      this.quantidade_produtos = this.carrinho.itens.length;
     });
   }
 
@@ -50,7 +56,7 @@ export class CarrinhoProduto {
 
     let toast = this.toastCtrl.create({
       message: 'Produto adicionado ao carrinho!',
-      duration: 3000,
+      duration: 1500,
       position: 'middle'
     });
   
@@ -59,7 +65,13 @@ export class CarrinhoProduto {
     });
   
     toast.present();
-
+    this.quantidade_produtos = this.carrinho.itens.length;
+    this.events.publish('adicionado');
   }
+  onPageLoaded(){
+    this.quantidade_produtos = this.carrinho.itens.length;
+  }
+
+  
 
 }

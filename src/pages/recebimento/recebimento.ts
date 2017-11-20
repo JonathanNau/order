@@ -21,13 +21,13 @@ export class Recebimento {
       this.recebimentos = [];
       console.log(data);
       for(var i = 0; i < data.length; i++) {
-
-        this.recebimentos.push(
-          {
-            recebimento_data: data[i]
-          }
-        );
- 
+        if (data[i].situacao == true){
+          this.recebimentos.push(
+            {
+              recebimento_data: data[i]
+            }
+          );
+        }
       }
     });
 /*

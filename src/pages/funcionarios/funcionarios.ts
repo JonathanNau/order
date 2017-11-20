@@ -19,9 +19,15 @@ export class Funcionarios {
       this.funcionarios = [];
 
       for(var i = 0; i < data.length; i++) {
+        //erro no código - verificar
         if (data[i].usuario.id == lp.id){
           
-        } else {          
+        } else {
+          if (data[i].usuario.is_active == true){
+            data[i].color = "secondary"
+          } else {
+            data[i].color = "danger"
+          }
           this.funcionarios.push(
             { 
               funcionarios_data: data[i]

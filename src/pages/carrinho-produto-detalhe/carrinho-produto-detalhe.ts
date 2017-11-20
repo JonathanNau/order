@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, ToastController, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { Carrinho } from '../../providers/carrinho'
 
@@ -14,9 +14,9 @@ export class CarrinhoProdutoDetalhe {
   valor = 1;
   imagem = '';
   valor_total;
-  constructor(private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private carrinho: Carrinho) {
+  constructor(public events: Events, private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private carrinho: Carrinho) {
     this.data = this.navParams.get('produto_data');
-    this.imagem = 'http://localhost:8000'+this.data.foto
+    this.imagem = 'http://192.168.0.149:8000'+this.data.foto
     console.log(this.data);
     this.valor_total = this.data.valor;
   }
@@ -50,6 +50,7 @@ export class CarrinhoProdutoDetalhe {
     });
   
     toast.present();
+    this.events.publish('adicionado');
   }
 
 }

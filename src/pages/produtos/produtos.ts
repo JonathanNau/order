@@ -17,7 +17,11 @@ export class Produtos {
       this.produtos = [];
 
       for(var i = 0; i < data.length; i++) {
-                  
+        if (data[i].situacao == true){
+          data[i].color = "secondary"
+        } else {
+          data[i].color = "danger"
+        }        
         this.produtos.push(
           {
             produto_data: data[i]

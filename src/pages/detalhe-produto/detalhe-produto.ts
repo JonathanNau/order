@@ -19,6 +19,7 @@ import { Produtos } from '../produtos/produtos';
 })
 export class DetalheProduto {
   data: any;
+  base64Image:any;
   a = 0;
   categorias: any;
   private dados : FormGroup;
@@ -39,10 +40,16 @@ export class DetalheProduto {
     
     this.data = this.navParams.get('produto_data');
     if (this.data !== 1){
+      this.convertToDataURLviaCanvas('http://192.168.0.149:8000'+this.data.foto, "image/jpeg").then((base64) => {
+        console.log(base64);
+        this.base64Image = base64
+      });
       this.dados = this.formBuilder.group({
         categoria: [this.data.categoria.id, Validators.required],
         nome: [this.data.nome, Validators.required],
+        descricao: [this.data.descricao, Validators.required],
         valor: [this.data.valor, Validators.required],
+        imagem: ['', Validators.required],
         status: [this.data.situacao, Validators.required],
       });
       this.a=1;
@@ -50,7 +57,9 @@ export class DetalheProduto {
       this.dados = this.formBuilder.group({
         categoria: ['', Validators.required],
         nome: ['', Validators.required],
+        descricao: ['', Validators.required],
         valor: ['', Validators.required],
+        imagem: ['', Validators.required],
         status: ['True', Validators.required],
       });
       this.a=2;
@@ -97,5 +106,24 @@ export class DetalheProduto {
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetalheProduto');
   }
+
+  convertToDataURLviaCanvas(url, outputFormat){
+    return new Promise((resolve, reject) => {
+    let img = new Image();
+    img.crossOrigin = 'Anonymous';
+    img.onload = () => {
+      let canvas = <HTMLCanvasElement> document.createElement('CANVAS'),
+        ctx = canvas.getContext('2d'),
+        dataURL;
+      canvas.height = img.height;
+      canvas.width = img.width;
+      ctx.drawImage(img, 0, 0);
+      dataURL = canvas.toDataURL(outputFormat);
+      resolve(dataURL);
+      canvas = null;
+    };
+    img.src = url;
+  });
+}
 
 }

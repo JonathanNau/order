@@ -21,17 +21,13 @@
             <ion-option *ngFor="let categoria of categorias" value={{categoria.categoria_data.id}}>{{categoria.categoria_data.nome}}</ion-option>
         </ion-select>
     </ion-item>
-
-  <!--
-    <ion-item>
-      <ion-label floating>Categoria</ion-label>
-      <ion-input formControlName = "categoria" type="text"></ion-input>
-    </ion-item>
-  -->
-
     <ion-item>
         <ion-label floating>Nome</ion-label>
         <ion-input formControlName = "nome" type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label floating>Descrição</ion-label>
+        <ion-textarea rows="3" formControlName = "descricao" name="description"></ion-textarea>
     </ion-item>
     <ion-item>
         <ion-label floating>Valor</ion-label>
@@ -41,6 +37,14 @@
         <ion-label>Situação</ion-label>
         <ion-toggle formControlName = "status"></ion-toggle>
     </ion-item>
+    <ion-item>
+      <ion-label >Imagem</ion-label>
+      <button ion-button outline item-end color="primary" (click)="accessGallery()">Carregar Imagem</button>
+  </ion-item>
+  <ion-item *ngIf="base64Image">
+    <img [src]="base64Image" />
+  </ion-item>
+
     <button ion-button full type="submit">Salvar</button>
   </form>
   <button ion-button full (click)="goback()">Voltar</button>

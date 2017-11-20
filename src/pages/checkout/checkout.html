@@ -29,7 +29,7 @@
 <ion-footer>
   <ion-toolbar>
       <h3 text-center>Valor total: R${{valor_total}}</h3>
-      <button ion-button full (click)="checkout()" detail-push>
+      <button ion-button [disabled]="!isenabled" full (click)="checkout()" detail-push>
         Finalizar pedido
       </button>
   </ion-toolbar>

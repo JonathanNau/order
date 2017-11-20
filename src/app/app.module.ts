@@ -21,6 +21,7 @@ import { Comida } from '../pages/comida/comida';
 import { Bebida } from '../pages/bebida/bebida';
 import { Checkout } from '../pages/checkout/checkout';
 import { HistoricoPedidos } from '../pages/historico-pedidos/historico-pedidos';
+import { HistoricoPedidosCliente } from '../pages/historico-pedidos-cliente/historico-pedidos-cliente';
 import { DetalhePedido } from '../pages/detalhe-pedido/detalhe-pedido';
 import { Produtos } from '../pages/produtos/produtos';
 import { DetalheProduto } from '../pages/detalhe-produto/detalhe-produto';
@@ -33,6 +34,7 @@ import { DetalhePedidoAberto } from '../pages/detalhe-pedido-aberto/detalhe-pedi
 import { DetalheItemPedidoAberto } from '../pages/detalhe-item-pedido-aberto/detalhe-item-pedido-aberto';
 import { DetalhePedidoFechado } from '../pages/detalhe-pedido-fechado/detalhe-pedido-fechado';
 import { DetalheItemPedidoFechado } from '../pages/detalhe-item-pedido-fechado/detalhe-item-pedido-fechado';
+import { RecebimentoLoja } from '../pages/recebimento-loja/recebimento-loja';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -67,7 +69,9 @@ import { Carrinho } from '../providers/carrinho';
     DetalhePedidoAberto,
     DetalheItemPedidoAberto,
     DetalhePedidoFechado,
-    DetalheItemPedidoFechado
+    DetalheItemPedidoFechado,
+    HistoricoPedidosCliente,
+    RecebimentoLoja
   ],
   imports: [
     BrowserModule,
@@ -105,7 +109,9 @@ import { Carrinho } from '../providers/carrinho';
     DetalhePedidoAberto,
     DetalheItemPedidoAberto,
     DetalhePedidoFechado,
-    DetalheItemPedidoFechado
+    DetalheItemPedidoFechado,
+    HistoricoPedidosCliente,
+    RecebimentoLoja
   ],
   providers: [
     StatusBar,

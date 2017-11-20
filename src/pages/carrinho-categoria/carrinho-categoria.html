@@ -9,8 +9,10 @@
   <ion-navbar>
     <ion-title>Categorias</ion-title>
     <ion-buttons right>
-        <button ion-button icon-only (click)="checkout()">
-            <ion-icon name="cart"></ion-icon>
+        <button ion-button id="notification-button" icon-only (click)="checkout()">
+            <ion-icon name="cart">
+              <ion-badge id="notifications-badge" color="danger">{{quantidade_produtos}}</ion-badge>
+            </ion-icon>
         </button>
       </ion-buttons>
   </ion-navbar>

@@ -8,7 +8,7 @@ import { Carrinho } from '../providers/carrinho'
 @Injectable()
 export class Json {
   data: any;
-  base_url = 'http://localhost:8000/api';
+  base_url = 'http://192.168.0.149:8000/api';
   constructor(public http: Http, public lp: LoginProvider, public carrinho: Carrinho) {
     console.log('Classe JSON criada');
   }
@@ -34,6 +34,14 @@ export class Json {
     .map(res => res.json())
   }
 
+  getRecebimentosLoja(){
+    console.log('Get recebimentos');
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return this.http.get(this.base_url+'/recebimento/'+this.lp.loja+'/', {headers: headers})
+    .map(res => res.json())
+  }
+
   getCategoriaClientesData(){
     var headers = new Headers();
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
@@ -52,6 +60,12 @@ export class Json {
     var headers = new Headers();
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
     return this.http.get(this.base_url+'/pedido-loja/'+this.lp.loja+'/', {headers: headers})
+    .map(res => res.json())
+  }
+  getPedidosCliente(){
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return this.http.get(this.base_url+'/pedido-cliente/'+this.lp.id+'/', {headers: headers})
     .map(res => res.json())
   }
 
@@ -125,6 +139,19 @@ export class Json {
       console.log(data['_body']);
       }, error => {
       console.log(error);
+    });
+  }
+
+  alterarRecebimento(data){
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return new Promise(resolve => {
+      this.http.put(this.base_url+'/recebimento/'+data.id+'/', data, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        this.data = data;
+        resolve(this.data);
+      });
     });
   }
 
@@ -283,7 +310,8 @@ export class Json {
     headers.append('Content-Type', 'application/json' );
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
 
-    return this.http.post(this.base_url+'/pedido/', data, {headers: headers})
+    return new Promise(resolve => {
+    this.http.post(this.base_url+'/pedido/', data, {headers: headers})
     .map(res => res.json())
     .subscribe(data1 => {
       console.log('Pedido Criado com sucesso!');
@@ -307,11 +335,12 @@ export class Json {
             console.log(error);
         });
       }
+    resolve(data1);
     }, error => {
       console.log('Problema ao criar um novo pedido');
       console.log(error);
     });
-
+  });
 
   }
 

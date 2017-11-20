@@ -13,17 +13,22 @@
       </button>
     </ion-buttons>
     <ion-title text-center>Produtos</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="searchToggle()">
+        <ion-icon name="search"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-    <ion-list>
-        <button ion-item *ngFor="let produto of produtos" (click)="itemSelected(produto)" detail-push>
+    <ion-list *ngFor="let produto of produtos" (click)="itemSelected(produto)">
+        <ion-item color={{produto.produto_data.color}} detail-push>
           {{produto.produto_data.nome}}
           <h3 item-end>R$ {{produto.produto_data.valor}}</h3>
-        </button>
+        </ion-item>
     </ion-list>
 </ion-content>
 <ion-footer>

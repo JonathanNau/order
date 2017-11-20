@@ -12,17 +12,22 @@
         <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Funcionarios</ion-title>
+    <ion-title text-center>Funcionários</ion-title>
+    <ion-buttons end>
+        <button ion-button icon-only (click)="searchToggle()">
+          <ion-icon name="search"></ion-icon>
+        </button>
+      </ion-buttons>
   </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list>
-      <button ion-item *ngFor="let funcionario of funcionarios" (click)="itemSelected(funcionario)" detail-push>
+  <ion-list *ngFor="let funcionario of funcionarios" (click)="itemSelected(funcionario)">
+      <ion-item color={{funcionario.funcionarios_data.color}} detail-push>
         {{funcionario.funcionarios_data.usuario.username}}
-      </button>
+      </ion-item >
   </ion-list>
 </ion-content>
 <ion-footer>

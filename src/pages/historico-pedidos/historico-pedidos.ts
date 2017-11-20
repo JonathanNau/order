@@ -18,7 +18,12 @@ export class HistoricoPedidos {
       this.pedidos = [];
 
       for(var i = 0; i < data.length; i++) {
-        if (data[i].situacao == 'Concluido' || data[i].situacao == 'Cancelado'){     
+        if (data[i].situacao == 'Concluido' || data[i].situacao == 'Cancelado'){
+          if (data[i].situacao == 'Concluido'){
+            data[i].color = "secondary";
+          } else {
+            data[i].color = "danger"
+          }
           this.pedidos.push(
             {
               pedido_data: data[i]
@@ -28,12 +33,7 @@ export class HistoricoPedidos {
       }
       console.log(this.pedidos);
     });
-    /*
-    this.pedidos = [
-      { id: '3', loja: "Italiano", data: '25/07/2017', valor: 'R$ 41,00', icon: "home" },
-      { id: '2', loja: "Bestburguer", data: '20/07/2017', valor: 'R$ 145,00', icon: "home" },
-      { id: '1', loja: "Italiano", data: '17/07/2017', valor: 'R$ 20,00', icon: "home" }
-    ];*/
+
   }
   itemSelected(pedido){
     this.navCtrl.push(DetalhePedidoFechado, pedido);

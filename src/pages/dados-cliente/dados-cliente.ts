@@ -14,23 +14,6 @@ export class DadosCliente {
   a = 0;
   private dados : FormGroup;
   constructor(private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams, private json: Json) {
-    this.data = this.navParams.get('funcionarios_data');
-
-    if (this.data !== 1){
-      this.dados = this.formBuilder.group({
-        name: [this.data.nome, Validators.required],
-        status: [this.data.situacao, Validators.required],
-      });
-      this.a=1;
-    } else {
-      this.dados = this.formBuilder.group({
-        name: ['', Validators.required],
-        email: ['', Validators.required],
-        senha: ['', Validators.required],
-      });
-      this.a=2;
-    }
-
     this.dados = this.formBuilder.group({
       name: ['Jonathan Nau', Validators.required],
       email: ['jonathan_nau@live.com', Validators.required],

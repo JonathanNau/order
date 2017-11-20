@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, AlertController } from 'ionic-angular';
 import { LoginProvider } from '../../providers/loginprovider'
-/**
- * Generated class for the Signup page.
- *
- * See http://ionicframework.com/docs/components/#navigation for more info
- * on Ionic pages and navigation.
- */
+
+import { Login } from '../login/login'
+
 @IonicPage()
 @Component({
   selector: 'page-signup',
@@ -25,12 +22,21 @@ export class Signup {
   }
 
   register(user) {
+    user.codigo = 0;
     this.loginprovider.adduser(user).then(data => {
             if(data) {
                 var alert = this.alertCtrl.create({
-                    title: 'Success',
-                    subTitle: 'User Created',
-                    buttons: ['ok']
+                    title: 'Usuário criado',
+                    subTitle: 'Obrigado por se cadastrar, seu usuário foi criado e já está disponível para acessar o sistema.',
+                    buttons: [
+                      {
+                        text: 'Ok',
+                        handler: () => {
+                          console.log('mensagem ok');
+                          this.navCtrl.setRoot(Login);
+                        }
+                      }
+                    ]
                 });
                 alert.present();
             }
