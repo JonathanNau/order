@@ -133,12 +133,17 @@ export class Json {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json' );
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
-    return this.http.put(this.base_url+'/usuarios/'+data.id+'/', data, {headers: headers})
-    .map(res => res.json())
-    .subscribe(data => {
-      console.log(data['_body']);
-      }, error => {
-      console.log(error);
+
+    return new Promise(resolve => {
+      this.http.put(this.base_url+'/usuarios/'+data.id+'/', data, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        console.log(data['_body']);
+        resolve(data);
+        }, error => {
+          resolve(false);
+          console.log(error);
+      });
     });
   }
 
@@ -201,40 +206,43 @@ export class Json {
   }
 
   novoFuncionario(data){
-    console.log('chamei Nova categoria');
+    console.log('JSON Novo funcionario');
     
     data.codigo = 2;
     let headers = new Headers();
     headers.append('Content-Type', 'application/json' );
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
-
-    return this.http.post(this.base_url+'/usuarios/', data, {headers: headers})
-    .map(res => res.json())
-    .subscribe(data1 => {
-      console.log(data1);
-      
-      data1.loja1 = {
-        'loja': this.lp.loja
-      };
-      data1.usuario1 = {
-        'usuario': data1.id
-      };
-
-      let env = {
-        'usuario1': data1.id,
-        'loja1': this.lp.loja
-      };
-      this.http.post(this.base_url+'/lojausuario/', env, {headers: headers})
+    return new Promise(resolve => {
+      this.http.post(this.base_url+'/usuarios/', data, {headers: headers})
       .map(res => res.json())
-      .subscribe(data2 => {
-        console.log(data2['_body']);
-        }, error => {
+      .subscribe(data1 => {
+        console.log(data1);
+        
+        data1.loja1 = {
+          'loja': this.lp.loja
+        };
+        data1.usuario1 = {
+          'usuario': data1.id
+        };
+
+        let env = {
+          'usuario1': data1.id,
+          'loja1': this.lp.loja
+        };
+        this.http.post(this.base_url+'/lojausuario/', env, {headers: headers})
+        .map(res => res.json())
+        .subscribe(data2 => {
+          resolve(data2);
+          console.log(data2['_body']);
+          }, error => {
+            resolve(false);
+          console.log(error);
+        });
+      }, error => {
+        resolve(false);
         console.log(error);
       });
-    }, error => {
-      console.log(error);
     });
-
 
   }
 
@@ -244,12 +252,16 @@ export class Json {
     headers.append('Content-Type', 'application/json' );
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
 
-    return this.http.put(this.base_url+'/categoria/'+data.id+'/', data, {headers: headers})
-    .map(res => res.json())
-    .subscribe(data => {
-      console.log(data['_body']);
+    return new Promise(resolve => {
+      this.http.put(this.base_url+'/categoria/'+data.id+'/', data, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        resolve(data);
+        console.log(data['_body']);
       }, error => {
-      console.log(error);
+        resolve(false);
+        console.log(error);
+      });
     });
   }
 
@@ -259,12 +271,16 @@ export class Json {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json' );
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
-    return this.http.post(this.base_url+'/categoria/', data, {headers: headers})
-    .map(res => res.json())
-    .subscribe(data => {
-      console.log(data['_body']);
-      }, error => {
-      console.log(error);
+    return new Promise(resolve => {
+      this.http.post(this.base_url+'/categoria/', data, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        resolve(data);
+        console.log(data['_body']);
+        }, error => {
+          resolve(false);
+        console.log(error);
+      });
     });
   }
 
@@ -368,17 +384,34 @@ export class Json {
     }
   }
 
+  /*
+return new Promise(resolve => {
+      this.http.put(this.base_url+'/categoria/'+data.id+'/', data, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        resolve(data);
+        console.log(data['_body']);
+      }, error => {
+        resolve(false);
+        console.log(error);
+      });
+    });
+  */
   alterarProduto(data){
     console.log('chamei json alterar produto');
     let headers = new Headers();
     headers.append('Content-Type', 'application/json' );
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
-    return this.http.put(this.base_url+'/produto/'+data.id+'/', data, {headers: headers})
-    .map(res => res.json())
-    .subscribe(data => {
-      console.log(data['_body']);
-      }, error => {
-      console.log(error);
+    return new Promise(resolve => {
+      this.http.put(this.base_url+'/produto/'+data.id+'/', data, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        resolve(data);
+        console.log(data['_body']);
+        }, error => {
+          resolve(false);
+        console.log(error);
+      });
     });
   }
 

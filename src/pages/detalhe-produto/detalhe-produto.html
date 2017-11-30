@@ -27,7 +27,7 @@
     </ion-item>
     <ion-item>
         <ion-label floating>Descrição</ion-label>
-        <ion-textarea rows="3" formControlName = "descricao" name="description"></ion-textarea>
+        <ion-textarea rows="3" formControlName = "descricao" type="text"></ion-textarea>
     </ion-item>
     <ion-item>
         <ion-label floating>Valor</ion-label>
@@ -39,12 +39,12 @@
     </ion-item>
     <ion-item>
       <ion-label >Imagem</ion-label>
-      <button ion-button outline item-end color="primary" (click)="accessGallery()">Carregar Imagem</button>
+      <button type="button" ion-button outline item-end color="primary" (click)="accessGallery()">Carregar Imagem</button>
   </ion-item>
   <ion-item *ngIf="base64Image">
     <img [src]="base64Image" />
   </ion-item>
-
+  
     <button ion-button full type="submit">Salvar</button>
   </form>
   <button ion-button full (click)="goback()">Voltar</button>

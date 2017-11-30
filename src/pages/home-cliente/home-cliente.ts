@@ -76,6 +76,7 @@ export class HomeCliente {
         }
       ]
     });
+    confirm.present();
     console.log('Error getting location', error);
 });
     

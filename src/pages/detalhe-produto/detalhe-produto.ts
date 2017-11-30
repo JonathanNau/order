@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Camera } from 'ionic-native';
 import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
@@ -79,8 +80,10 @@ export class DetalheProduto {
     let dat = {
       'categoria': dados.value.categoria,
       'nome': dados.value.nome,
+      'descricao': dados.value.descricao,
       'valor': dados.value.valor,
-      'situacao': dados.value.status
+      'situacao': dados.value.status,
+      'foto': this.base64Image,
     };
     console.log(dat);
     this.json.novoProduto(dat);
@@ -91,11 +94,20 @@ export class DetalheProduto {
     data.categoria = dados.value.categoria;
     data.categoria1 = dados.value.categoria;
     data.nome = dados.value.nome;
+    data.descricao = dados.value.descricao;
     data.valor = dados.value.valor;
     data.situacao = dados.value.status;
+    data.foto = this.base64Image;
     console.log(data);
-    this.json.alterarProduto(data);
-    this.appCtrl.getRootNav().setRoot(Produtos);
+    this.json.alterarProduto(data).then(dat => {
+      if (dat != false){
+        console.log('Sucesso ao atualizar produto')
+        this.appCtrl.getRootNav().setRoot(Produtos);
+      } else {
+        console.log('Problema ao atualizar produto')
+      }
+    });
+    
   }
 
   goback() {
@@ -106,6 +118,17 @@ export class DetalheProduto {
   ionViewDidLoad() {
     console.log('ionViewDidLoad DetalheProduto');
   }
+
+  accessGallery(){
+    Camera.getPicture({
+      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+      destinationType: Camera.DestinationType.DATA_URL
+     }).then((imageData) => {
+       this.base64Image = 'data:image/jpeg;base64,'+imageData;
+      }, (err) => {
+       console.log(err);
+     });
+   }
 
   convertToDataURLviaCanvas(url, outputFormat){
     return new Promise((resolve, reject) => {

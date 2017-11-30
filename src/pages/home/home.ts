@@ -38,16 +38,6 @@ export class HomePage {
     });
   }
 
-  accessGallery(){
-    Camera.getPicture({
-      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
-      destinationType: Camera.DestinationType.DATA_URL
-     }).then((imageData) => {
-       this.base64Image = 'data:image/jpeg;base64,'+imageData;
-      }, (err) => {
-       console.log(err);
-     });
-   }
   itemSelected(pedido){
     this.navCtrl.push(DetalhePedidoAberto, pedido);
   }

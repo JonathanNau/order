@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { App, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { App, AlertController, LoadingController, IonicPage, NavController, NavParams } from 'ionic-angular';
 import {Validators, FormBuilder, FormGroup } from '@angular/forms';
 
 import { Json } from '../../providers/json'
@@ -14,7 +14,7 @@ export class DetalhesFuncionario {
   data: any;
   a = 0;
   private dados : FormGroup;
-  constructor(private appCtrl: App, public json: Json, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public alertCtrl: AlertController, private appCtrl: App, public json: Json, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.data = this.navParams.get('funcionarios_data');
     if (this.data !== 1){
       this.dados = this.formBuilder.group({
@@ -44,6 +44,12 @@ export class DetalhesFuncionario {
     }
   }
   alterar(data, dados){
+    const loading = this.loadingCtrl.create({
+      content: 'Aguarde!! Alterando funcionário.'
+    });
+  
+    loading.present();
+
     console.log('Alterar Categoria');
     let dat = {
       'id': data.usuario.id,
@@ -53,12 +59,37 @@ export class DetalhesFuncionario {
       'is_active': dados.value.status
     };
     console.log(dat);
-    this.json.alterarFuncionario(dat);
-    this.appCtrl.getRootNav().setRoot(Funcionarios);
+    this.json.alterarFuncionario(dat).then(data => {
+      loading.dismiss();
+      if (data != false){ 
+        this.appCtrl.getRootNav().setRoot(Funcionarios);
+      } else {
+        let confirm = this.alertCtrl.create({
+          title: 'Erro ao alterar Funcionário',
+          message: 'Não foi possivel alterar o funcionário no momento, verifique sua conexão e tente novamente mais tarde.',
+          buttons: [
+            {
+              text: 'Ok',
+              role: 'cancel',
+              handler: () => {
+                console.log('Botão ok precionado');
+              }
+            }
+          ]
+        });
+        confirm.present();
+        console.log("problema ao alterar funcionario");
+      }
+    });
   }
 
   novo(dados){
-    console.log('Nova Categoria');
+    const loading = this.loadingCtrl.create({
+      content: 'Aguarde!! criando funcionário.'
+    });
+  
+    loading.present();
+    console.log('Novo funcionario!');
     let dat = {
       'username': dados.value.nome,
       'email': dados.value.email,
@@ -66,8 +97,29 @@ export class DetalhesFuncionario {
       'is_active': dados.value.status
     };
     console.log(dat);
-    this.json.novoFuncionario(dat);
-    this.appCtrl.getRootNav().setRoot(Funcionarios);
+    this.json.novoFuncionario(dat).then(data => {
+      loading.dismiss();
+      if (data != false){
+        this.appCtrl.getRootNav().setRoot(Funcionarios);
+      } else {
+        let confirm = this.alertCtrl.create({
+          title: 'Erro ao criar Funcionário',
+          message: 'Não foi possivel criar o funcionário no momento, verifique sua conexão e tente novamente mais tarde.',
+          buttons: [
+            {
+              text: 'Ok',
+              role: 'cancel',
+              handler: () => {
+                console.log('Botão ok precionado');
+              }
+            }
+          ]
+        });
+        confirm.present();
+      }
+    });
+
+    
   }
 
   goback() {
