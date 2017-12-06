@@ -12,8 +12,13 @@ import { Json } from '../../providers/json'
   templateUrl: 'historico-pedidos.html',
 })
 export class HistoricoPedidos {
+  toggled: boolean;
   public pedidos;
+  public pedidos1;
+  searchTerm: string = '';
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public json: Json) {
+    this.toggled = false;
     this.json.getPedidosLoja().subscribe(data => {
       this.pedidos = [];
 
@@ -31,10 +36,27 @@ export class HistoricoPedidos {
           );
         }
       }
+      this.setFilteredItems();
       console.log(this.pedidos);
     });
 
   }
+
+  searchToggle() {
+    this.toggled = this.toggled ? false : true;
+  }
+
+  filterItems(searchTerm){
+    console.log(searchTerm)
+    return this.pedidos.filter((item) => {
+        return String(item.pedido_data.usuario.first_name).toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    });  
+  }
+
+  setFilteredItems() {
+    this.pedidos1 = this.filterItems(this.searchTerm);
+  }
+
   itemSelected(pedido){
     this.navCtrl.push(DetalhePedidoFechado, pedido);
   }

@@ -12,6 +12,10 @@ import { Json } from '../../providers/json'
 })
 export class Produtos {
   public produtos;
+  public produtos1;
+  toggled: boolean;
+  searchTerm: string = '';
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private json: Json) {
     this.json.getProdutosData().subscribe(data => {
       this.produtos = [];
@@ -28,8 +32,24 @@ export class Produtos {
           }
         );
       }
+      this.setFilteredItems();
       console.log(this.produtos);
     });
+  }
+
+  searchToggle() {
+    this.toggled = this.toggled ? false : true;
+  }
+
+  filterItems(searchTerm){
+    console.log(searchTerm)
+    return this.produtos.filter((item) => {
+        return String(item.produto_data.nome).toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    });  
+  }
+
+  setFilteredItems() {
+    this.produtos1 = this.filterItems(this.searchTerm);
   }
 
   itemSelected(produto){

@@ -105,7 +105,7 @@ export class Recebimento {
           {
             text: 'Sim',
             handler: () => {
-              //Destruir tudo dos produtos
+              this.carrinho.itens = [];
               this.navCtrl.pop();
             }
           }

@@ -26,7 +26,7 @@
 <ion-content padding>
   <ion-list *ngFor="let funcionario of funcionarios" (click)="itemSelected(funcionario)">
       <ion-item color={{funcionario.funcionarios_data.color}} detail-push>
-        {{funcionario.funcionarios_data.usuario.username}}
+        {{funcionario.funcionarios_data.usuario.first_name}}
       </ion-item >
   </ion-list>
 </ion-content>

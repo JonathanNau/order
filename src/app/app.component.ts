@@ -11,7 +11,7 @@ import { DadosLoja } from '../pages/dados-loja/dados-loja';
 import { DadosCliente } from '../pages/dados-cliente/dados-cliente';
 import { HistoricoPedidos } from '../pages/historico-pedidos/historico-pedidos';
 import { HistoricoPedidosCliente } from '../pages/historico-pedidos-cliente/historico-pedidos-cliente';
-import { TabsPage } from '../pages/tabs-page/tabs-page';
+import { CatalogoCategoria } from '../pages/catalogo-categoria/catalogo-categoria';
 import { Produtos } from '../pages/produtos/produtos';
 import { Funcionarios } from '../pages/funcionarios/funcionarios';
 import { RecebimentoLoja } from '../pages/recebimento-loja/recebimento-loja';
@@ -51,7 +51,7 @@ export class MyApp {
       { title: 'Produtos', component: Produtos },
       { title: 'Recebimentos', component: RecebimentoLoja },
       { title: 'Pedidos', component: HistoricoPedidos },
-      { title: 'Catálogo', component: TabsPage },
+      { title: 'Catálogo', component: CatalogoCategoria },
       { title: 'Sair', component: null },
     ];
 

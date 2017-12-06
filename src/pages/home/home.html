@@ -15,7 +15,7 @@
 <ion-content padding class="home">
   <ion-list *ngFor="let pedido of pedidos" (click)="itemSelected(pedido)" #item>
     <ion-item  detail-push>
-      Cliente: {{pedido.pedido_data.usuario.username}}
+      Cliente: {{pedido.pedido_data.usuario.first_name}}
       <h3 item-end>{{pedido.pedido_data.recebimento.nome}}: {{pedido.pedido_data.recebimento_valor}}</h3>
       <p>Data: {{pedido.pedido_data.data}}</p>
     </ion-item>

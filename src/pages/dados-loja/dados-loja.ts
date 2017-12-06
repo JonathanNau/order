@@ -45,7 +45,7 @@ export class DadosLoja {
       telefone: [lp.telefone_loja, Validators.required],
       latitude: [lp.latitude_loja, Validators.required],
       longitude: [lp.longitude_loja, Validators.required],
-      senha: ['', Validators.nullValidator],
+      senha: [lp.senha, Validators.required],
     });
   }
 
@@ -61,16 +61,15 @@ export class DadosLoja {
 
   }*/
   atualiza(dados){
-    
-    console.log(dados);
-    console.log('Alterar Categoria');
+    console.log('Alterar dados da loja');
+
     let data = {
       'nome': dados.value.name,
       'email': dados.value.email,
       'telefone': dados.value.telefone,
       'longitude': dados.value.longitude,
       'latitude': dados.value.latitude,
-      'senha': dados.value.senha
+      'password': dados.value.senha
     }
     console.log(data);
     this.json.alterarDadosLoja(data);

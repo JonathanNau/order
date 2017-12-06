@@ -8,7 +8,7 @@ import { Carrinho } from '../providers/carrinho'
 @Injectable()
 export class Json {
   data: any;
-  base_url = 'http://192.168.0.149:8000/api';
+  base_url = 'http://54.87.228.88/Project/api';
   constructor(public http: Http, public lp: LoginProvider, public carrinho: Carrinho) {
     console.log('Classe JSON criada');
   }
@@ -46,6 +46,13 @@ export class Json {
     var headers = new Headers();
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
     return this.http.get(this.base_url+'/categoria/'+this.carrinho.loja.loja_data.id+'/', {headers: headers})
+    .map(res => res.json())
+  }
+
+  getCategoriaLojaCatalogo(){
+    var headers = new Headers();
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return this.http.get(this.base_url+'/categoria/'+this.lp.loja+'/', {headers: headers})
     .map(res => res.json())
   }
 
@@ -97,10 +104,10 @@ export class Json {
     .map(res => res.json())
   }
   alterarDadosLoja(data){
-    console.log('chamei json alterar categoria');
+    console.log('chamei json alterar dados loja');
     let data_user = {
       'email': data.email,
-      'senha': data.senha
+      'password': data.password
     };
     let data_loja = {
     'nome': data.nome,
@@ -114,6 +121,8 @@ export class Json {
     this.http.put(this.base_url+'/usuarios/'+this.lp.id+'/', data_user, {headers: headers})
     .map(res => res.json())
     .subscribe(data => {
+      this.lp.email = data.email;
+      this.lp.senha = data.password;
       console.log(data['_body']);
       }, error => {
       console.log(error);
@@ -121,12 +130,38 @@ export class Json {
     this.http.put(this.base_url+'/lojas/'+this.lp.loja+'/', data_loja, {headers: headers})
     .map(res => res.json())
     .subscribe(data => {
+      this.lp.nome_loja = data.nome
+      this.lp.telefone_loja = data.telefone;
+      this.lp.latitude_loja = data.latitude;
+      this.lp.longitude_loja = data.longitude;
       console.log(data['_body']);
       }, error => {
       console.log(error);
     });
   }
 
+
+  alterarDadosCliente(data){
+    console.log('chamei json alterar dados cliente');
+
+    let headers = new Headers();
+    headers.append('Content-Type', 'application/json' );
+    headers.append('Authorization','JWT ' +this.lp.getCredentials());
+    return new Promise(resolve => {
+      this.http.put(this.base_url+'/usuarios/'+this.lp.id+'/', data, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        console.log(data['_body']);
+        this.lp.nome_cliente = data.first_name;
+        this.lp.email = data.email;
+        this.lp.senha = data.password;
+        resolve(data);
+        }, error => {
+        console.log(error);
+        resolve(false);
+      });
+    });
+  }
 
   alterarFuncionario(data){
     console.log('chamei json alterar categoria');
@@ -295,13 +330,17 @@ export class Json {
     let headers = new Headers();
     headers.append('Content-Type', 'application/json' );
     headers.append('Authorization','JWT ' +this.lp.getCredentials());
-    return this.http.post(this.base_url+'/produto/', data, {headers: headers})
-    .map(res => res.json())
-    .subscribe(data => {
-      console.log(data['_body']);
+    return new Promise(resolve => {
+      this.http.post(this.base_url+'/produto/', data, {headers: headers})
+      .map(res => res.json())
+      .subscribe(data => {
+        resolve(data);
+        console.log(data['_body']);
       }, error => {
-      console.log(error);
-    });
+        resolve(false);
+        console.log(error);
+      });
+  });
   }
 
   recuperaData(){
@@ -332,27 +371,29 @@ export class Json {
     .subscribe(data1 => {
       console.log('Pedido Criado com sucesso!');
       console.log(data1);
-
       console.log('Iniciar salvamento dos produtos!');
+
       for (let i of this.carrinho.itens){
-        let env = {
-          'pedido1': data1.id,
-          'produto1': i.produto.id,
-          'valor': i.valor,
-          'quantidade': i.quantidade
-        }
-  
-        this.http.post(this.base_url+'/itempedido/', env, {headers: headers})
-        .map(res => res.json())
-        .subscribe(data2 => {
-          console.log(data2['_body']);
-          }, error => {
-            console.log('Problema ao inserir os produtos');
-            console.log(error);
-        });
+        i.pedido = data1.id;
+        i.produto = i.produto.id;
       }
-    resolve(data1);
+
+      let env = {
+        'produtos': this.carrinho.itens,
+      }
+      console.log(JSON.stringify(env));
+      this.http.post(this.base_url+'/itempedido2/', JSON.stringify(env), {headers: headers})
+      .map(res => res.json())
+      .subscribe(data2 => {
+      console.log(data2['_body']);
+        resolve(data1);
+        }, error => {
+        resolve(false);
+        console.log('Problema ao inserir os produtos');
+        console.log(error);
+      });
     }, error => {
+      resolve(false);
       console.log('Problema ao criar um novo pedido');
       console.log(error);
     });

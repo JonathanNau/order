@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Events, App, IonicPage, NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
+import { Events, App, LoadingController, IonicPage, NavController, NavParams, AlertController, ViewController } from 'ionic-angular';
 
 import { HistoricoPedidos } from '../historico-pedidos/historico-pedidos';
 import { Login } from '../login/login';
@@ -18,7 +18,7 @@ export class Checkout {
   public produtos;
   isenabled:boolean=false;
   public valor_total;
-  constructor(public events: Events, private json: Json, private carrinho: Carrinho, public appCtrl: App, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public viewCtrl: ViewController) {
+  constructor(public events: Events, private json: Json, private carrinho: Carrinho, public appCtrl: App, public navCtrl: NavController, public navParams: NavParams, public alertCtrl: AlertController, public viewCtrl: ViewController, public loadingCtrl: LoadingController) {
     this.produtos = carrinho.itens;
     this.valor_total = 0.0;
     if (this.carrinho.itens.length > 0){
@@ -30,10 +30,14 @@ export class Checkout {
       console.log(item.valor*item.quantidade);
       console.log(item.quantidade);
       this.valor_total += +item.valor * +item.quantidade;
-    }    
+    }
   }
 
   checkout(){
+    const loading = this.loadingCtrl.create({
+      content: 'Salvando produtos. Aguarde!'
+    });
+
     let alert = this.alertCtrl.create({
       title: 'Finalizar pedido',
       message: 'Deseja finalizar o pedido?',
@@ -48,10 +52,17 @@ export class Checkout {
         {
           text: 'Sim, estou satisfeito',
           handler: () => {
+            loading.present();
             this.json.novoPedido().then(data => {
+              loading.dismiss();
+              if (data != false){
               console.log(data);
+              this.carrinho.itens = [];
               let produto = {'pedido_data': data}
               this.navCtrl.setRoot(DetalhePedidoFechado, produto);
+              } else {
+                console.log('Problema grave!')
+              }
             });
           }
         }

@@ -41,7 +41,7 @@ export class DetalheProduto {
     
     this.data = this.navParams.get('produto_data');
     if (this.data !== 1){
-      this.convertToDataURLviaCanvas('http://192.168.0.149:8000'+this.data.foto, "image/jpeg").then((base64) => {
+      this.convertToDataURLviaCanvas('http://54.87.228.88/Project'+this.data.foto, "image/jpeg").then((base64) => {
         console.log(base64);
         this.base64Image = base64
       });
@@ -86,8 +86,15 @@ export class DetalheProduto {
       'foto': this.base64Image,
     };
     console.log(dat);
-    this.json.novoProduto(dat);
-    this.appCtrl.getRootNav().setRoot(Produtos);
+    this.json.novoProduto(dat).then(data1 => {
+      if (data1 != false){
+        console.log('Sucesso ao atualizar produto');
+        this.appCtrl.getRootNav().setRoot(Produtos);
+      } else {
+        console.log('Problema ao atualizar produto');
+      }
+    });
+    
   }
 
   alterar(data, dados){
@@ -101,10 +108,10 @@ export class DetalheProduto {
     console.log(data);
     this.json.alterarProduto(data).then(dat => {
       if (dat != false){
-        console.log('Sucesso ao atualizar produto')
+        console.log('Sucesso ao atualizar produto');
         this.appCtrl.getRootNav().setRoot(Produtos);
       } else {
-        console.log('Problema ao atualizar produto')
+        console.log('Problema ao atualizar produto');
       }
     });
     

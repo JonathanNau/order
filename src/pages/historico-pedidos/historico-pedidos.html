@@ -5,28 +5,27 @@
   Ionic pages and navigation.
 -->
 <ion-header>
-
   <ion-navbar>
-    <ion-buttons left>
-      <button ion-button icon-only menuToggle>
+    <ion-buttons *ngIf="!toggled" left>
+      <button ion-button menuToggle>
         <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
       </button>
     </ion-buttons>
-    <ion-title text-center>Pedidos</ion-title>
+    <ion-title *ngIf="!toggled" text-center>Pedidos</ion-title>
+    <ion-searchbar *ngIf="toggled" [(ngModel)]="searchTerm" [showCancelButton]="true" (ionCancel)="searchToggle()" (ionInput)="setFilteredItems()" placeholder="Pesquisar"></ion-searchbar>
     <ion-buttons end>
       <button ion-button icon-only (click)="searchToggle()">
         <ion-icon name="search"></ion-icon>
       </button>
     </ion-buttons>
   </ion-navbar>
-
 </ion-header>
 
 
 <ion-content padding>
-  <ion-list *ngFor="let pedido of pedidos" (click)="itemSelected(pedido)" #item>
+  <ion-list *ngFor="let pedido of pedidos1" (click)="itemSelected(pedido)" #item>
     <ion-item color={{pedido.pedido_data.color}} detail-push>
-      Cliente: {{pedido.pedido_data.usuario.username}}
+      Cliente: {{pedido.pedido_data.usuario.first_name}}
       <h3 item-end>{{pedido.pedido_data.recebimento.nome}}: {{pedido.pedido_data.recebimento_valor}}</h3>
       <p>Data: {{pedido.pedido_data.data}}</p>
     </ion-item>

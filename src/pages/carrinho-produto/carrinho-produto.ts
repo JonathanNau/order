@@ -24,12 +24,13 @@ export class CarrinhoProduto {
       this.produtos = [];
 
       for(var i = 0; i < data.length; i++) {
-                  
-        this.produtos.push(
-          {
-            produto_data: data[i]
-          }
-        );
+        if (data[i].situacao == true){              
+          this.produtos.push(
+            {
+              produto_data: data[i]
+            }
+          );
+        }
       }
       console.log(this.produtos);
     });

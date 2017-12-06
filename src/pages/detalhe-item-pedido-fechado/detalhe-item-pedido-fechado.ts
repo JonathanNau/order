@@ -22,7 +22,7 @@ export class DetalheItemPedidoFechado {
     this.produto = this.navParams.get('produtos_data');
     this.quantidade = this.produto.quantidade;
     this.valor1 = this.produto.valor;
-    this.imagem = 'http://localhost:8000'+this.produto.produto.foto;
+    this.imagem = 'http://54.87.228.88/Project'+this.produto.produto.foto;
     this.valor_total = String((this.produto.valor * this.produto.quantidade).toFixed(2)).replace('.', ',');
   }
 

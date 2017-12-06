@@ -13,18 +13,21 @@ import { Funcionarios } from '../funcionarios/funcionarios';
 export class DetalhesFuncionario {
   data: any;
   a = 0;
+  desativado: boolean;
   private dados : FormGroup;
   constructor(public alertCtrl: AlertController, private appCtrl: App, public json: Json, private formBuilder: FormBuilder, public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController) {
     this.data = this.navParams.get('funcionarios_data');
     if (this.data !== 1){
+      this.desativado = true;
       this.dados = this.formBuilder.group({
-        nome: [this.data.usuario.username, Validators.required],
+        nome: [this.data.usuario.first_name, Validators.required],
         email: [this.data.usuario.email, Validators.required],
         password: [this.data.usuario.password, Validators.required],
         status: [this.data.usuario.is_active, Validators.required],
       });
       this.a=1;
     } else {
+      this.desativado = false;
       this.dados = this.formBuilder.group({
         nome: ['', Validators.required],
         email: ['', Validators.required],
@@ -53,7 +56,8 @@ export class DetalhesFuncionario {
     console.log('Alterar Categoria');
     let dat = {
       'id': data.usuario.id,
-      'username': dados.value.nome,
+      'username': dados.value.email,
+      'first_name': dados.value.nome,
       'email': dados.value.email,
       'password': dados.value.password,
       'is_active': dados.value.status
@@ -91,7 +95,8 @@ export class DetalhesFuncionario {
     loading.present();
     console.log('Novo funcionario!');
     let dat = {
-      'username': dados.value.nome,
+      'username': dados.value.email,
+      'first_name': dados.value.nome,
       'email': dados.value.email,
       'password': dados.value.password,
       'is_active': dados.value.status

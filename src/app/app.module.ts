@@ -35,6 +35,9 @@ import { DetalheItemPedidoAberto } from '../pages/detalhe-item-pedido-aberto/det
 import { DetalhePedidoFechado } from '../pages/detalhe-pedido-fechado/detalhe-pedido-fechado';
 import { DetalheItemPedidoFechado } from '../pages/detalhe-item-pedido-fechado/detalhe-item-pedido-fechado';
 import { RecebimentoLoja } from '../pages/recebimento-loja/recebimento-loja';
+import { CatalogoCategoria } from '../pages/catalogo-categoria/catalogo-categoria';
+import { CatalogoProduto } from '../pages/catalogo-produto/catalogo-produto';
+import { CatalogoDetalheProduto } from '../pages/catalogo-detalhe-produto/catalogo-detalhe-produto';
 
 import { Json } from '../providers/json';
 import { LoginProvider } from '../providers/loginprovider';
@@ -71,7 +74,10 @@ import { Carrinho } from '../providers/carrinho';
     DetalhePedidoFechado,
     DetalheItemPedidoFechado,
     HistoricoPedidosCliente,
-    RecebimentoLoja
+    RecebimentoLoja,
+    CatalogoCategoria,
+    CatalogoProduto,
+    CatalogoDetalheProduto
   ],
   imports: [
     BrowserModule,
@@ -111,7 +117,10 @@ import { Carrinho } from '../providers/carrinho';
     DetalhePedidoFechado,
     DetalheItemPedidoFechado,
     HistoricoPedidosCliente,
-    RecebimentoLoja
+    RecebimentoLoja,
+    CatalogoCategoria,
+    CatalogoProduto,
+    CatalogoDetalheProduto
   ],
   providers: [
     StatusBar,

@@ -34,6 +34,7 @@ export class Carrinho {
     }
     if (!existe_produto){
       let item = {
+        'pedido': 0,
         'produto': produto,
         'valor': produto.valor,
         'quantidade': quantidade

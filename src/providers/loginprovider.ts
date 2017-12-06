@@ -12,13 +12,14 @@ import { MenuController } from 'ionic-angular';
 */
 @Injectable()
 export class LoginProvider {
-    base_url = 'http://192.168.0.149:8000/api';
+    base_url = 'http://54.87.228.88/Project/api';
   isLoggedin: boolean;
   AuthToken;
   codigo;
   id;
   loja; //salvar código da loja quando usuário for do tipo loja
   nome_loja;
+  nome_cliente;
   telefone_loja;
   latitude_loja;
   longitude_loja;
@@ -33,6 +34,7 @@ export class LoginProvider {
     this.id = 0;
     this.loja = 0;
     this.nome_loja='';
+    this.nome_cliente='';
     this.telefone_loja=0;
     this.latitude_loja=0;
     this.longitude_loja=0;
@@ -72,8 +74,11 @@ salvaUser(user){
     window.localStorage.setItem('user_order_id', user.id);
     window.localStorage.setItem('user_order_cod', user.codigo);
     console.log('salvo id='+ user.id + ', codigo=' + user.codigo);
-    this.id = user.id
-    this.codigo = user.codigo
+    this.id = user.id;
+    this.codigo = user.codigo;
+    this.nome_cliente = user.first_name;
+    this.email = user.email;
+    this.senha = user.password;
 }
 
 loadDadosUser(creds, data){
@@ -84,7 +89,7 @@ loadDadosUser(creds, data){
         .map(res => res.json())
         .subscribe(data => {
             for(var i = 0; i < data.length; i++) {
-                if (data[i].username == creds.username){
+                if (data[i].email == creds.username){
                     this.salvaUser(data[i]);
                     resolve(true);
                 }
@@ -111,8 +116,8 @@ loadDadosLoja(data){
                 this.latitude_loja=data.loja.latitude;
                 this.longitude_loja=data.loja.longitude;
                 this.situação_loja=data.loja.situacao;
-                this.email=data.usuario.email;
-                this.senha=data.usuario.password;
+                //this.email=data.usuario.email;
+                //this.senha=data.usuario.password;
                 resolve(true);
             }
         }, error => {
@@ -136,6 +141,7 @@ authenticate(user) {
         .subscribe(data => {
             if(data.token){
                 console.log('TOKEN obtido!')
+                console.log(data.token)
                 this.storeUserCredentials(data.token);
                 this.loadDadosUser(creds,data).then(data => {
                     if(data){
@@ -161,7 +167,8 @@ authenticate(user) {
 
 adduser(user) {
     let creds = {
-        username: user.name,
+        username: user.email,
+        first_name: user.name,
         password: user.password,
         email: user.email,
         codigo: user.codigo,

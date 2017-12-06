@@ -16,7 +16,7 @@ export class CarrinhoProdutoDetalhe {
   valor_total;
   constructor(public events: Events, private toastCtrl: ToastController, public navCtrl: NavController, public navParams: NavParams, private carrinho: Carrinho) {
     this.data = this.navParams.get('produto_data');
-    this.imagem = 'http://192.168.0.149:8000'+this.data.foto
+    this.imagem = 'http://54.87.228.88/Project'+this.data.foto
     console.log(this.data);
     this.valor_total = this.data.valor;
   }

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ToastController, App, AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
+import { Events, ToastController, App, AlertController, IonicPage, NavController, NavParams } from 'ionic-angular';
 
 import { DetalhePedidoAberto } from '../detalhe-pedido-aberto/detalhe-pedido-aberto';
 
@@ -17,11 +17,11 @@ export class DetalheItemPedidoAberto {
   imagem;
   quantidade;
   valor1;
-  constructor(private toastCtrl: ToastController, private appCtrl: App,public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public json: Json) {
+  constructor(public events: Events,private toastCtrl: ToastController, private appCtrl: App,public alertCtrl: AlertController, public navCtrl: NavController, public navParams: NavParams, public json: Json) {
     this.produto = this.navParams.get('produtos_data');
     this.quantidade = this.produto.quantidade;
     this.valor1 = this.produto.valor;
-    this.imagem = 'http://localhost:8000'+this.produto.produto.foto;
+    this.imagem = 'http://54.87.228.88/Project'+this.produto.produto.foto;
     this.valor_total = String((this.produto.valor * this.produto.quantidade).toFixed(2)).replace('.', ',');
 
   }
@@ -65,7 +65,7 @@ export class DetalheItemPedidoAberto {
             console.log('Botão SIM precionado');
             let da = {pedido_data: this.produto.pedido};
             this.json.removerProdutoPedido(this.produto).then(data => {
-              this.appCtrl.getRootNav().setRoot(DetalhePedidoAberto, da);
+              this.events.publish('produto_alterado');
               let toast = this.toastCtrl.create({
                 message: 'Produto removido do pedido!',
                 duration: 1500,
@@ -106,9 +106,8 @@ export class DetalheItemPedidoAberto {
             this.produto.quantidade = this.quantidade;
             this.produto.produto1 = this.produto.produto.id;
             this.produto.pedido1 = this.produto.pedido.id;
-            let da = {pedido_data: this.produto.pedido};
             this.json.alterarQuantidadeProduto(this.produto).then(data => {
-              this.appCtrl.getRootNav().setRoot(DetalhePedidoAberto, da);
+              this.events.publish('produto_alterado');
               let toast = this.toastCtrl.create({
                 message: 'Quantidade alterada!',
                 duration: 1500,

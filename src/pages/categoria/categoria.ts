@@ -10,8 +10,13 @@ import { DetalheCategoria } from '../detalhe-categoria/detalhe-categoria';
   templateUrl: 'categoria.html',
 })
 export class Categoria {
-  categorias: any;
+  public categorias;
+  public categorias1;
+  toggled: boolean;
+  searchTerm: string = '';
+
   constructor(public navCtrl: NavController, public navParams: NavParams, public json: Json) {
+    this.toggled = false;
     this.json.getCategoriaData().subscribe(data => {
       this.categorias = [];
       for(var i = 0; i < data.length; i++) {
@@ -26,8 +31,24 @@ export class Categoria {
           }
         );
       }
+      this.setFilteredItems();
       console.log(this.categorias);
     });
+  }
+
+  searchToggle() {
+    this.toggled = this.toggled ? false : true;
+  }
+
+  filterItems(searchTerm){
+    console.log(searchTerm)
+    return this.categorias.filter((item) => {
+        return String(item.categoria_data.nome).toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
+    });  
+  }
+
+  setFilteredItems() {
+    this.categorias1 = this.filterItems(this.searchTerm);
   }
 
   ionViewDidLoad() {
